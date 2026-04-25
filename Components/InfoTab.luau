@@ -43,7 +43,7 @@ return function(Window)
     })
 
     User:AddLabel("ID: " .. LocalPlayer.Name, true)
-    User:AddLabel("Total Executions: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions) or "N/A", true)
+    User:AddLabel("Total Executions: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
 
     local Name, Version = Abysall.Environment.identifyexecutor()
     local Executor = InfoTab:AddLeftGroupbox("Executor Info")
