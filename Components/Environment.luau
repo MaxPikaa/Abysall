@@ -45,6 +45,7 @@ local function AddResult(Name, Text)
     }
 end
 
+Environment.Results = Results
 Environment.PrintResults = function()
     local Executor = Environment.identifyexecutor and Environment.identifyexecutor() or "Unknown"
     print("Test Result")
