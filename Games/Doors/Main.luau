@@ -5113,6 +5113,8 @@ if not Functions.FirePrompt then
         Prompt.RequiresLineOfSight = OldClip
     end
     Functions.ForceFirePrompt = function(Prompt)
+        local Triggered = false
+
         local OldHold = Prompt.HoldDuration
         local OldEnabled = Prompt.Enabled
         local OldClip = Prompt.RequiresLineOfSight
@@ -5132,11 +5134,17 @@ if not Functions.FirePrompt then
             end
         end
 
-        for Index = 1, 5, 1 do
-            Camera.CFrame = CFrame.lookAt(Position.LookVector * 3, Position.Position)
-            Prompt:InputHoldBegin()
-            Prompt:InputHoldEnd()
-            task.wait()
+        Prompt.Triggered:Once(function()
+            Triggered = true
+        end)
+
+        for Index = 1, 10, 1 do
+            if not Triggered then
+                Camera.CFrame = CFrame.lookAt(Position.LookVector * 3, Position.Position)
+                Prompt:InputHoldBegin()
+                Prompt:InputHoldEnd()
+                task.wait()
+            end
         end
 
         Prompt.HoldDuration = OldHold
