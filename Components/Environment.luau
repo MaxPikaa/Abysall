@@ -59,6 +59,7 @@ Environment.PrintResults = function()
 end
 
 local function RunTest(Name, Test, InternalName)
+    print("testing: " .. Name)
     local TimedOut = false
     Tested = Tested + 1
 
@@ -181,7 +182,7 @@ RunTest("identifyexecutor", function()
     local Start = tick()
     Global.setfpscap(6)
     task.wait(0.25)
-    Global.setfpscap(240)
+    Global.setfpscap(0)
 
     local Finish = tick() - Start
     assert(Finish > 0.12, "Failed to set fps cap")
@@ -236,41 +237,27 @@ RunTest("getcallbackvalue", function()
 end)
 
 RunTest("getinstances", function()
+    local TestPart1 = Instance.new("Part")
+    local TestPart2 = Instance.new("Part", Services.Workspace)
+
     local InstanceList = Global.getinstances()
-    local Found = false
-    local NilFound = false
+    assert(table.find(InstanceList, TestPart2), "Did not return an instance")
+    assert(table.find(InstanceList, TestPart1), "Did not return an instance parented to nil")
 
-    for Index, Object in pairs(InstanceList) do
-        if typeof(Object) == "Instance" then
-            Found = true
-            if Object.Parent == nil then
-                NilFound = true
-            end
-        end
-    end
-
-    assert(Found == true, "Did not return any instances")
-    assert(NilFound == true, "Did not return any nil instances")
+    TestPart1:Destroy()
+    TestPart2:Destroy()
 end)
 
 RunTest("getnilinstances", function()
+    local TestPart1 = Instance.new("Part")
+    local TestPart2 = Instance.new("Part", Services.Workspace)
+
     local InstanceList = Global.getnilinstances()
-    local Found = false
-    local NilFound = false
+    assert(not table.find(InstanceList, TestPart2), "Returned an instance not parented to nil")
+    assert(table.find(InstanceList, TestPart1), "Did not return an instance parented to nil")
 
-
-    for Index, Object in pairs(InstanceList) do
-        if typeof(Object) == "Instance" then
-            if Object.Parent == nil then
-                NilFound = true
-            else
-                Found = true
-            end
-        end
-    end
-
-    assert(Found == false, "Returned an instance not parented to nil")
-    assert(NilFound == true, "Did not return any nil instances")
+    TestPart1:Destroy()
+    TestPart2:Destroy()
 end)
 
 RunTest("fireproximityprompt", function()
@@ -667,18 +654,24 @@ end)
 
 RunTest("isnetworkowner", function()
     local Test = Instance.new("Part", Services.Workspace)
+    local Test2 = Instance.new("Part", Services.Workspace)
     local TestPart
-    for Index, Part in pairs(game:GetDescendants()) do
+
+    Test2.Anchored = true
+    for Index, Part in pairs(Services.Workspace:GetDescendants()) do
         if Part:IsA("BasePart") and Part.Anchored then
             TestPart = Part
             break
         end
     end
+
     assert(TestPart ~= nil, "skipped, no part to test with")
 
     assert(Global.isnetworkowner(Test) == true, "Did not return true for a client owned part")
+    assert(Global.isnetworkowner(Test2) == true, "Did not return true for a client owned anchored part")
     assert(Global.isnetworkowner(TestPart) == false, "Did not return false for a non client owned part")
     Test:Destroy()
+    Test2:Destroy()
 end)
 
 --[[ Signals ]]
