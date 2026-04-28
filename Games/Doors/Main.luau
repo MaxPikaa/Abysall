@@ -3370,9 +3370,9 @@ Toggles.RemoveSeekTrigger:OnChanged(function(Value)
                     while Object:FindFirstChild("Collision") and Tries < 150 do
                         for Index2, Object2 in pairs(Object:GetChildren()) do
                             if Object2:IsA("BasePart") then
-                                Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
-                                task.wait()
                                 Abysall.Environment.firetouchinterest(RootPart, Object2, 0)
+                                task.wait()
+                                Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
                             end
                         end
                         Tries = Tries + 1
@@ -3679,7 +3679,7 @@ Functions.HandleCharacter = function(NewCharacter)
 	    if ModuleName == "Void" or ModuleName == "Glitch" then
 		    if Globals.AnticheatDisabled == true then
 			    Globals.AnticheatDisabled = false
-                unctions.Notify({Title = "The anticheat has been re-enabled.", Body = "Interact with a ladder to disable it again."})
+                Functions.Notify({Title = "The anticheat has been re-enabled.", Body = "Interact with a ladder to disable it again."})
 		    end
             LocalPlayer:SetAttribute("CurrentRoom", LatestRoom.Value)
 	    end
@@ -4742,9 +4742,9 @@ Functions.HandleObject = function(Object)
             while Object:FindFirstChild("Collision") and Tries < 150 do
                 for Index2, Object2 in pairs(Object:GetChildren()) do
                     if Object2:IsA("BasePart") then
-                        Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
-                        task.wait()
                         Abysall.Environment.firetouchinterest(RootPart, Object2, 0)
+                        task.wait()
+                        Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
                     end
                 end
                 task.wait()
@@ -4899,9 +4899,9 @@ Functions.HandleObject = function(Object)
                 for Index2, Object2 in pairs(Object:GetDescendants()) do
                     if Object2:IsA("BasePart") then
                         task.spawn(function()
-                            Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
-                            task.wait()
                             Abysall.Environment.firetouchinterest(RootPart, Object2, 0)
+                            task.wait()
+                            Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
                             while Abysall.Environment.isnetworkowner(Object2) do
                                 Object2.CFrame = CFrame.new(-49999, -49999, -49999)
                                 break
@@ -4916,9 +4916,9 @@ Functions.HandleObject = function(Object)
                 for Index2, Object2 in pairs(Object:GetDescendants()) do
                     if Object2:IsA("BasePart") then
                         task.spawn(function()
-                            Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
-                            task.wait()
                             Abysall.Environment.firetouchinterest(RootPart, Object2, 0)
+                            task.wait()
+                            Abysall.Environment.firetouchinterest(RootPart, Object2, 1)
                             while Abysall.Environment.isnetworkowner(Object2) do
                                 OwnershipReceived = true
                                 Object2.CFrame = CFrame.new(49999, 49999, 49999)
