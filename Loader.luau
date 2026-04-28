@@ -1,13 +1,14 @@
 if Abysall then
     return 
 end
+getgenv().Abysall = {}
 
 local GameList = {
   [2440500124] = "Doors"
 }
 
 local BaseUrl = "https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/"
-getgenv().Abysall = {
+Abysall = {
     Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
     ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
     Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.luau"))(),
