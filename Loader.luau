@@ -11,7 +11,6 @@ local BaseUrl = "https://raw.githubusercontent.com/bocaj111004/Abysall/refs/head
 getgenv().Abysall = {
     Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
     ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
-    Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.luau"))(),
 }
 
 local function CloneReference(Object)
@@ -47,7 +46,9 @@ if Abysall.Environment.writefile and Abysall.Environment.readfile then
     Abysall.Environment.writefile("Abysall/UserData.json", Services.HttpService:JSONEncode(Decoded))
 end
 
-loadstring(game:HttpGet(BaseUrl .. "Components/Analytics.luau"))()
+Abysall.Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.luau"))()
+Abysall.Analytics = loadstring(game:HttpGet(BaseUrl .. "Components/Analytics.luau"))()
+
 local Success, Result = pcall(function()
     local Game = GameList[game.GameId]
     if Game then
