@@ -44,7 +44,6 @@ return function(Window)
 			if value then
 				if queue_on_teleport then
 					queue_on_teleport([==[
-						game.Loaded:Wait()
 						loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Loader.luau"))()
 					]==])
 				end
