@@ -31,7 +31,8 @@ local Services = setmetatable({}, {
 if Abysall.Environment.writefile and Abysall.Environment.readfile then
     if not Abysall.Environment.isfile("Abysall/UserData.json") then
         local Data = {
-            TotalExecutions = 0
+            TotalExecutions = 0,
+            UILibrary = "Obsidian"
         }
         Abysall.Environment.writefile("Abysall/UserData.json", Services.HttpService:JSONEncode(Data))
     end
