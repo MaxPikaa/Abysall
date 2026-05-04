@@ -2952,6 +2952,10 @@ Connections.RoomsAutoWalkHandler = Services.RunService.RenderStepped:Connect(fun
                 Character:SetAttribute("Hiding", false)
             end
 
+            if CurrentRooms[tostring(LatestRoom.Value)]:FindFirstChild("Door") then
+                CurrentRooms[tostring(LatestRoom.Value)].Door.Door.CanCollide = false
+            end
+
             if TargetPosition and LocalPlayer:DistanceFromCharacter(TargetPosition) < 750 then
                 Path:ComputeAsync(CollisionPart.Position, TargetPosition)
                 if #Path:GetWaypoints() == 0 then
@@ -5450,7 +5454,6 @@ LocalPlayer.CharacterAdded:Connect(function(NewCharacter)
     Functions.HandleCharacter(NewCharacter)
 end)
 
-Abysall.Interface.ApplySettingsTab(Window)
 Library:OnUnload(function()
     for Index, Connection in pairs(Connections) do
         pcall(function()
@@ -5577,4 +5580,5 @@ Library:OnUnload(function()
 end)
 
 task.wait(0.5)
+Abysall.Interface.ApplySettingsTab(Window)
 Functions.Notify({Title = "Successfully loaded in " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " seconds."})
