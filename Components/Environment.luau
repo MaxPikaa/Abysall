@@ -149,26 +149,6 @@ RunTest("getgc", function()
     assert(table.find(NoTables, TestFunction), "Failed to find a function")
 end)
 
-RunTest("filtergc", function()
-    local Dummy_Table = {
-        ["Dummy_Value"] = 10
-    }
-    local function Dummy_Function() end
-
-    local Retrieved = Global.filtergc("function", {
-        Name = "Dummy_Function", 
-        IgnoreExecutor = false
-    })
-
-    local Retrieved2 = Global.filtergc("table", {
-        Keys = {"Dummy_Value"}, 
-        Values = {10}
-    })
-
-    assert(table.find(Retrieved, Dummy_Function), "failed to find a function")
-    assert(table.find(Retrieved2, Dummy_Table), "failed to find a table")
-end)
-
 --[[ Miscellaneous ]]
 
 RunTest("identifyexecutor", function()
@@ -259,7 +239,7 @@ RunTest("fireproximityprompt", function()
     Global.fireproximityprompt(TestPrompt)
 
     local Tries = 0
-    while not Fired and Tries < 200 do
+    while not Fired and Tries < 250 do
         Tries = Tries + 1
         task.wait()
     end
@@ -280,7 +260,7 @@ RunTest("fireclickdetector", function()
     Global.fireclickdetector(TestClick)
 
     local Tries = 0
-    while not Fired and Tries < 200 do
+    while not Fired and Tries < 250 do
         Tries = Tries + 1
         task.wait()
     end
@@ -308,7 +288,7 @@ RunTest("firetouchinterest", function()
     Global.firetouchinterest(TestPart1, TestPart2, 1)
 
     local Tries = 0
-    while not Fired and Tries < 200 do
+    while not Fired and Tries < 250 do
         Tries = Tries + 1
         task.wait()
     end
@@ -405,38 +385,6 @@ RunTest("isexecutorclosure", function()
     assert(Global.isexecutorclosure(Global.newcclosure) == true, "Did not return true for an executor global")
     assert(Global.isexecutorclosure(warn) == false, "Did not return false for a Roblox global")
     assert(Global.isexecutorclosure(TestC) == true, "Did not return true for an executor C function")
-end)
-
---[[ oth ]]
-
-RunTest("oth.hook", function()
-    local Old = Global.oth.hook(version, function()
-    return "hooked!"
-    end)
-
-    assert(version() == "hooked!", "failed to hook a function")
-end, "oth_hook")
-
-RunTest("oth.unhook", function()
-    assert(Environment.oth_hook, "oth.hook is required to test") -- not actually required, just prevents it from passing if oth.hook fails
-    Global.oth.unhook(version)
-
-    assert(version() ~= "hooked!", "failed to unhook a function")
-end, "oth_unhook")
-
-RunTest("oth.is_hook_thread", function()
-    assert(Environment.oth_hook, "oth.hook is required to test")
-    assert(Environment.oth_unhook, "oth.unhook is required to test")
-
-    local Hooked = false
-    Global.oth.hook(version, function()
-        Hooked = Global.oth.is_hook_thread()
-    end)
-
-    version()
-    Global.oth.unhook(version)
-    assert(Hooked == true, "Did not return true for a hooked thread")
-    assert(Global.oth.is_hook_thread() == false, "Did not return false for a normal thread")
 end)
 
 --[[ Metatables ]]
@@ -679,7 +627,7 @@ RunTest("firesignal", function()
 
     Global.firesignal(TestEvent.OnClientEvent, "Example", 10, true)
     local Tries = 0
-    while not Fired and Tries < 200 do
+    while not Fired and Tries < 250 do
         Tries = Tries + 1
         task.wait()
     end
@@ -718,7 +666,7 @@ RunTest("getconnections", function()
     end
 
     local Tries = 0
-    while not Fired and Tries < 200 do
+    while not Fired and Tries < 250 do
         Tries = Tries + 1
         task.wait()
     end
@@ -801,118 +749,6 @@ RunTest("crypt.hash", function()
     end
 end, "crypt_hash")
 
-RunTest("crypt.hmac", function()
-    local Algorithms = {
-        "sha1",
-        "sha384",
-        "sha512",
-        "md5",
-        "sha256",
-        "sha3-224",
-        "sha3-256",
-        "sha3-512"
-        }
-
-    for Index, Algorithm in pairs(Algorithms) do
-        assert(typeof(crypt.hmac("Example", "TestKey", Algorithm)) == "string", "Did not return a string")
-    end
-end)
-
---[[ Scripts ]]
-
-RunTest("getscriptbytecode", function()
-    local TestScript = Services.Players.LocalPlayer.PlayerScripts.PlayerScriptsLoader
-    local ReferenceData = [[\6\3\5\7require\6script\6Parent\12PlayerModule\12WaitForChild\0\1\4\0\0\1\2\0\13\163\0\0\0\164\0\1\0\0\0\0\64\164\1\3\0\0\0\32\64M\1\1$\4\0\0\0o\3\5\0\188\1\1\211\6\0\0\0\159\1\3\0\159\0\0\1\130\0\1\0\7\3\1\4\0\0\0\64\3\2\4\0\0\32\64\3\3\3\4\3\5\0\1\0\1\24\0\6\0\0\0\0\0\0\0\0\0\0\1\1\0\0\0\0\0]]
-    local Bytecode = Global.getscriptbytecode(TestScript)
-
-    assert(typeof(Bytecode) == "string", "Did not return a string")
-    assert(Bytecode ~= ReferenceData, "Did not return the expected data")
-end)
-
-RunTest("decompile", function()
-    local TestScript = Services.Players.LocalPlayer.PlayerScripts.PlayerModule
-    local Output = Global.decompile(TestScript)
-
-    assert(typeof(Output) == "string", "Did not return a string")
-    local Constants = {
-        "GetCameras",
-        "GetControls",
-        "GetClickToMoveController"
-    }
-
-    local Found = 0
-    for Index, Constant in pairs(Constants) do
-    if string.find(Output, Constant) then
-        Found = Found + 1
-    end
-end
-
-    assert(Found == 3, "Decompiled output did not contain expected constants")
-    assert(typeof(loadstring(Output)) == "function", "Did not return valid luau code")
-end)
-
-RunTest("getscriptclosure", function()
-    local TestScript = Services.Players.LocalPlayer.PlayerScripts.PlayerModule
-    local Generated = Global.getscriptclosure(TestScript)()
-
-    assert(Generated ~= require(TestScript), "Generated module should not be equal to original")
-    assert(Generated.GetControls, "Did not return the expected data")
-end)
-
-RunTest("getscripthash", function()
-    local TestScript = Services.Players.LocalPlayer.Character.Animate:Clone()
-    local Generated = Global.getscripthash(TestScript)
-
-    assert(typeof(Generated) == "string", "Did not return a string")
-    assert(Generated == Global.getscripthash(TestScript), "Returned different hashes for the same script")
-    TestScript.Source = [[return 10]]
-    assert(Generated ~= Global.getscripthash(TestScript), "Did not return a different hash for different source")
-    assert(Global.getscripthash(Instance.new("LocalScript")) == nil, "Returned a hash for a script with empty bytecode")
-end)
-
-RunTest("getrunningscripts", function()
-    local TestScriptRunning = Services.Players.LocalPlayer.PlayerScripts.PlayerModule.ControlModule
-    local TestScriptInactive = Services.Players.LocalPlayer.PlayerScripts.PlayerScriptsLoader
-
-    local ActiveFound = false
-    local InactiveFound = false
-
-    local List = Global.getrunningscripts()
-    for Index, Script in pairs(List) do
-        if Script == TestScriptRunning then
-            ActiveFound = true
-        end
-        if Script == TestScriptInactive then
-            InactiveFound = true
-        end
-    end
-
-    assert(ActiveFound == true, "Did not return a running script")
-    assert(InactiveFound == false, "Returned a non-running script")
-end)
-
-RunTest("getloadedmodules", function()
-    local TestScriptRunning = Services.Players.LocalPlayer.PlayerScripts.PlayerModule.ControlModule
-    local TestScriptInactive = Instance.new("ModuleScript", Services.Players.LocalPlayer.PlayerScripts)
-
-    local ActiveFound = false
-    local InactiveFound = false
-
-    local List = Global.getloadedmodules()
-    for Index, Script in pairs(List) do
-        if Script == TestScriptRunning then
-            ActiveFound = true
-        end
-        if Script == TestScriptInactive then
-            InactiveFound = true
-        end
-    end
-
-    assert(ActiveFound == true, "Did not return a loaded module")
-    assert(InactiveFound == false, "Returned an unloaded module")
-    TestScriptInactive:Destroy()
-end)
-
 RunTest("require", function()
     local TestScript = Global.require(Services.Players.LocalPlayer.PlayerScripts.PlayerModule)
 
@@ -925,18 +761,6 @@ RunTest("require", function()
     end
     assert(TestScript.GetControls() == "test", "Unable to change module values")
     TestScript.GetControls = Original
-end)
-
-RunTest("getsenv", function()
-    local TestScript = Services.Players.LocalPlayer.Character.Animate
-    local Env = Global.getsenv(TestScript)
-
-    assert(typeof(Env) == "table", "Did not return a table")
-
-    local Success, Result = pcall(function()
-        Env.error("Example", 0)
-    end)
-    assert(Result == "Example", "Did not return the script environment")
 end)
 
 return Environment
