@@ -5777,6 +5777,7 @@ Library:OnUnload(function()
 
     Globals.SeekNodesFolder:Destroy()
     Globals.RoomsNodesFolder:Destroy()
+    Globals.ManipulateBody:Destroy()
 
     local OldAmbient = CurrentRooms:FindFirstChild(tostring(LocalPlayer:GetAttribute("CurrentRoom"))):GetAttribute("Ambient")
     Services.TweenService:Create(Services.Lighting, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {Ambient = OldAmbient}):Play()
@@ -5817,6 +5818,7 @@ Library:OnUnload(function()
         Collision.CollisionCrouch.Position = RootPart.Position + Vector3.new(0, -0.982, 0)
     end
 
+    CollisionClone:Destroy()
     CollisionPartClone:Destroy()
     Abysall.ESPLibrary:Unload()
     if Main_Game then
