@@ -343,9 +343,13 @@ function Library:AddESP(Parameters)
 			end
 		end
 		local Last = tick()
-		local Connection = RunService.Heartbeat:Connect(function()
+		local Connection
+        Connection = RunService.Heartbeat:Connect(function()
 			if tick() - Last > 1 / Library.RenderLimit then
 				Render()
+                if Library.ElementsEnabled[Object] ~= true then
+                    Connection:Disconnect()
+                end
 				Last = tick()
 			end
 		end)
@@ -527,10 +531,10 @@ function Library:RemoveESP(Object)
 				ArrowsTable[Object] = nil
 			end
 			if ConnectionsTable[Object] then
-				for Index, Connection in pairs(ConnectionsTable[Object]) do
-					Connection:Disconnect()
+					for Index, Connection in pairs(ConnectionsTable[Object]) do
+						Connection:Disconnect()
+					end
 				end
-			end
 			if Library.Lines[Object] ~= nil then
 				if Library.Lines[Object][1] ~= nil  then
 					Library.Lines[Object][1]:Destroy()
