@@ -4010,6 +4010,9 @@ Functions.HandleCharacter = function(NewCharacter)
         end
 
         Character:SetAttribute("Sliding", Globals.Sliding)
+        if Character:GetAttribute("Crouching") ~= Functions.IsCrouching() then
+            Character:SetAttribute("Crouching", Functions.IsCrouching())
+        end
 
         local Params = RaycastParams.new()
         Params.FilterDescendantsInstances = {Character}
