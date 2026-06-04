@@ -13,14 +13,16 @@ local Services = setmetatable({}, {
 })
 
 if Abysall.Environment.identifyexecutor and Abysall.Environment.request then
+    local Player = Services.Players.LocalPlayer
     local Data = {
-        Account = Services.Players.LocalPlayer.Name,
+        Account = Player.Name,
         Executor = Abysall.Environment.identifyexecutor(),
-        Executions = tostring(Abysall.TotalExecutions)
+        Executions = tostring(Abysall.TotalExecutions),
+        GameName = Services.MarketplaceService:GetProductInfo(game.PlaceId).Name,
+        AvatarUrl = Services.Players:GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
     }
-
     Abysall.Environment.request({
-        Url = "http://93.115.101.180:10577/send", 
+        Url = "http://93.115.101.180:10577/send",
         Method = "POST",
         Headers = {
             ["content-type"] = "application/json"
