@@ -2864,7 +2864,7 @@ Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTextFont", {
         "Arimo",
         "ArimoBold",
         },
-    Default = 12
+    Default = 41
 })
 
 Groupboxes.Visuals_ESP_Settings:AddDivider()
@@ -2921,7 +2921,7 @@ Abysall.ESPLibrary:SetTextOutlineTransparency(0)
 Abysall.ESPLibrary:SetRenderLimit(240)
 Abysall.ESPLibrary:SetFadeTime(0.25)
 Abysall.ESPLibrary:SetTextSize(18)
-Abysall.ESPLibrary:SetFont(Enum.Font.Highway)
+Abysall.ESPLibrary:SetFont(Enum.Font.RobotoCondensed)
 Abysall.ESPLibrary:SetTracers(false)
 Abysall.ESPLibrary:SetTracerSize(0.75)
 Abysall.ESPLibrary:SetTracerOrigin("Bottom")
@@ -5284,7 +5284,7 @@ for Index, Object in (Services.Players:GetPlayers()) do
         end)
         local DeadConnection = Object:GetAttributeChangedSignal("Alive"):Connect(function()
             if Object:GetAttribute("Alive") ~= true then
-                Functions.RemoveESP(Object)
+                Functions.RemoveESP(Object.Character)
             end
         end)
         table.insert(Connections, Connection)
@@ -5314,7 +5314,7 @@ Connections.PlayerHandler = Services.Players.PlayerAdded:Connect(function(Object
         end)
         local DeadConnection = Object:GetAttributeChangedSignal("Alive"):Connect(function()
             if Object:GetAttribute("Alive") ~= true then
-                Functions.RemoveESP(Object)
+                Functions.RemoveESP(Object.Character)
             end
         end)
         table.insert(Connections, Connection)
@@ -5552,7 +5552,7 @@ end
 
 local LastFire = tick()
 Connections.AutoInteract = Services.RunService.Heartbeat:Connect(function()
-    if Toggles.AutoInteractToggle.Value and tick() - LastFire > 0.05 or Options.AutoInteractKeybind:GetState() and tick() - LastFire > 0.05 then
+    if Toggles.AutoInteractToggle.Value and tick() - LastFire > 0.025 or Options.AutoInteractKeybind:GetState() and tick() - LastFire > 0.025 then
         for Index, Prompt in (Objects.Prompts) do
            task.spawn(function()
                 if Prompt.Parent ~= nil and Prompt.Parent:IsA("BasePart") or Prompt.Parent ~= nil and Prompt.Parent:IsA("Model") then
