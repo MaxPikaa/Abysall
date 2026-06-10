@@ -1854,11 +1854,11 @@ Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTextTransparency",        { Text =
 Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTextOutlineTransparency", { Text = "Text Outline Transparency", Min = 0, Max = 1, Default = 0,    Rounding = 2, Compact = true })
 Groupboxes.Visuals_ESP_Settings:AddSlider("ESPFadeTime",                { Text = "Fade Time",                 Min = 0, Max = 1, Default = 0.25, Rounding = 2, Compact = true })
 Groupboxes.Visuals_ESP_Settings:AddSlider("ESPRenderLimit",             { Text = "Render Limit",              Min = 30, Max = 240, Default = 240, Rounding = 0, Compact = true })
-Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTextSize",                { Text = "Text Size",                 Min = 12, Max = 24, Default = 18, Rounding = 0, Compact = true })
+Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTextSize",                { Text = "Text Size",                 Min = 12, Max = 24, Default = 20, Rounding = 0, Compact = true })
 Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTextFont", {
 	Text = "Text Font",
 	Values = { "Legacy","Arial","ArialBold","SourceSans","SourceSansBold","SourceSansLight","SourceSansItalic","Bodoni","Garamond","Cartoon","Code","Highway","SciFi","Arcade","Fantasy","Antique","SourceSansSemibold","Gotham","GothamMedium","GothamBold","GothamBlack","AmaticSC","Bangers","Creepster","DenkOne","Fondamento","FredokaOne","GrenzeGotisch","IndieFlower","JosefinSans","Jura","Kalam","LuckiestGuy","Merriweather","Michroma","Nunito","Oswald","PatrickHand","PermanentMarker","Roboto","RobotoCondensed","RobotoMono","Sarpanch","SpecialElite","TitilliumWeb","Ubuntu","BuilderSans","BuilderSansMedium","BuilderSansBold","BuilderSansExtraBold","Arimo","ArimoBold" },
-	Default = 41
+	Default = 12
 })
 Groupboxes.Visuals_ESP_Settings:AddDivider()
 Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTracersOrigin",  { Text = "Tracer Origin", Values = { "Bottom","Center","Top","Mouse" }, Default = 1 })
@@ -1876,8 +1876,8 @@ Abysall.ESPLibrary:SetTextTransparency(0)
 Abysall.ESPLibrary:SetTextOutlineTransparency(0)
 Abysall.ESPLibrary:SetRenderLimit(240)
 Abysall.ESPLibrary:SetFadeTime(0.25)
-Abysall.ESPLibrary:SetTextSize(18)
-Abysall.ESPLibrary:SetFont(Enum.Font.RobotoCondensed)
+Abysall.ESPLibrary:SetTextSize(20)
+Abysall.ESPLibrary:SetFont(Enum.Font.Highway)
 Abysall.ESPLibrary:SetTracers(false)
 Abysall.ESPLibrary:SetTracerSize(0.75)
 Abysall.ESPLibrary:SetTracerOrigin("Bottom")
