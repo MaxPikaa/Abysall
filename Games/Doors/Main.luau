@@ -4013,7 +4013,7 @@ Connections.AutoInteract = Services.RunService.Heartbeat:Connect(function()
     if tick() - Globals.LastAutoInteractFire < 1/60 then return end
 
 	for _, Prompt in Objects.Prompts do
-        if Prompt:GetAttribute("ParentRoom") and Prompt:GetAttribute("ParentRoom") ~= LocalPlayer:GetAttribute("CurrentRoom") then continue end
+        if Prompt:GetAttribute("ParentRoom") and tonumber(Prompt:GetAttribute("ParentRoom")) ~= tonumber(LocalPlayer:GetAttribute("CurrentRoom")) then continue end
 
 		if Prompt.Parent and (Prompt.Parent:IsA("BasePart") or Prompt.Parent:IsA("Model")) then
 			local Distance
