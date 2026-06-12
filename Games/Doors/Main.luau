@@ -967,12 +967,20 @@ end
 
 Globals.UsedRandomCodes = {}
 Functions.GetRandomCode = function()
-	local Code = Functions.GetLibraryCode()
-	if Code then
-		return (Code:gsub("_", function()
-			return tostring(math.random(1, 10) - 1)
-		end))
-	end
+    local CodeTemplate = Functions.GetLibraryCode()
+    if CodeTemplate then
+        local NewCode
+		local Tries = 0
+        repeat
+            NewCode = (CodeTemplate:gsub("_", function()
+                return tostring(math.random(0, 9))
+            end))
+			Tries = Tries + 1
+        end until not Globals.UsedRandomCodes[NewCode] or Tries > 20
+        
+        Globals.UsedRandomCodes[NewCode] = true
+        return NewCode
+    end
 end
 
 local Window = Library:CreateWindow({
