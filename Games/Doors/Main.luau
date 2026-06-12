@@ -968,19 +968,21 @@ end
 Globals.UsedRandomCodes = {}
 Functions.GetRandomCode = function()
     local CodeTemplate = Functions.GetLibraryCode()
-    if CodeTemplate then
-        local NewCode
-		local Tries = 0
-        repeat
-            NewCode = (CodeTemplate:gsub("_", function()
-                return tostring(math.random(0, 9))
-            end))
-			Tries = Tries + 1
-        until (not Globals.UsedRandomCodes[NewCode] or Tries > 10)
-        
-        Globals.UsedRandomCodes[NewCode] = true
-        return NewCode
+    if not CodeTemplate then
+        return nil
     end
+
+    local NewCode
+    local Tries = 0
+    repeat
+        NewCode = CodeTemplate:gsub("_", function()
+            return tostring(math.random(0, 9))
+        end)
+        Tries = Tries + 1
+    until not Globals.UsedRandomCodes[NewCode] or Tries >= 10
+
+    Globals.UsedRandomCodes[NewCode] = true
+    return NewCode
 end
 
 local Window = Library:CreateWindow({
