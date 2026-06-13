@@ -2052,7 +2052,7 @@ Functions.RoomsAutoWalk.GetPathfindTarget = function()
 end
 
 Connections.RoomsAutoWalkHandler = Services.RunService.Heartbeat:Connect(function()
-	if Floor ~= "Rooms" or not Toggles.RoomsAutoWalk.Value or Globals.RoomsAutoWalkActive or not CollisionPart then return end
+	if Floor ~= "Rooms" or not Toggles.RoomsAutoWalk.Value or Globals.RoomsAutoWalkActive or not CollisionPart or LatestRoom.Value >= 1000 then return end
 	Globals.RoomsAutoWalkActive = true
 
 	local Path = Services.PathfindingService:CreatePath({
