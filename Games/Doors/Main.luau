@@ -214,7 +214,6 @@ local ItemNames = {
 local CutsceneNames = {
     "Figure",
     "FigureEnd",
-    "FigureHotelChase",
     "FigureHotelEnd",
     "FigureHotelFire",
     "SeekIntroFools",
