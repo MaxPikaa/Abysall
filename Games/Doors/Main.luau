@@ -2250,6 +2250,13 @@ Groupboxes.Floors_Completion:AddButton({
             return
         end
 
+		local IsCutscene = false
+		local CutsceneConnection = RemotesFolder.Cutscene.OnClientEvent.OnClientEvent:Connect(function()
+			IsCutscene = true
+			task.wait(7)
+			IsCutscene = false
+		end)
+
         local function GetNextPump()
             local Highest = {
                 Height = -69420,
@@ -2273,8 +2280,8 @@ Groupboxes.Floors_Completion:AddButton({
 				Pump:SetAttribute("Abysall_Completed", true)
 		    end)
 
-            while task.wait(0.5) do
-				if CollisionPart.Anchored then
+            while task.wait(0.1) do
+				if IsCutscene then
 					continue
 				end
 
@@ -2427,7 +2434,7 @@ Connections.KnobFarm = Services.RunService.Heartbeat:Connect(function()
 				end
 			end
 			RemotesFolder.Statistics:FireServer()
-			task.wait(0.5)
+			task.wait(0.25)
 			Globals.KnobFarmActive = false
 		end
 	end
