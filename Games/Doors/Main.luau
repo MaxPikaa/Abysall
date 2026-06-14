@@ -3540,16 +3540,13 @@ Functions.HandleObject = function(Object)
 		if Toggles.BypassGloombatEggs.Value then
 			for _, Part in Object:GetDescendants() do
 				if Part:IsA("BasePart") then Part.CanTouch = false
-
-					local Connection = Part:GetPropertyChangedSignal("CanTouch"):Connect(function()
-						if Part.CanTouch == Toggles.BypassGloombatEggs.Value then
-							Part.CanTouch = not Toggles.BypassGloombatEggs.Value
-						end
-					end)
-					table.insert(Connections, Connection)
 				end
 			end
 		end
+		local Connection = Object.DescendantAdded:Connect(function(Part)
+			if Part:IsA("BasePart") then Part.CanTouch = false end
+		end)
+		table.insert(Connections, Connection)
 		table.insert(Objects.Entities, Object)
 	elseif Name == "TriggerEventCollision" and Functions.CheckCompatability({"firetouchinterest"}) then
 		if (Floor == "Fools" or Floor == "OldHotel") and Toggles.RemoveSeekTrigger.Value then
