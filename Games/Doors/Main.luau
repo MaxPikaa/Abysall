@@ -3567,16 +3567,18 @@ Functions.HandleObject = function(Object)
 			Room = nil,
 			Distance = math.huge
 		}
-		for _, Room in pairs(CurrentRooms:GetChildren()) do
-			local Distance = (Room:GetPivot().Position - Object:GetPivot().Position).Magnitude
-			if Distance < Nearest.Distance then
-				Nearest.Room = Room
-				Nearest.Distance = Distance
+		for _, Player in pairs(Players:GetPlayers()) do
+			if Player.Character then
+				local Distance = (Player.Character:GetPivot().Position - Object:GetPivot().Position).Magnitude
+				if Distance < Nearest.Distance then
+					Nearest.Room = tonumber(Player:GetAttribute("CurrentRoom"))
+					Nearest.Distance = Distance
+				end
 			end
 		end
 
 		if Nearest.Room then
-			Object:SetAttribute("ParentRoom", tonumber(Nearest.Room.Name))
+			Object:SetAttribute("ParentRoom", tonumber(Nearest.Room))
 		end
 
 		if Toggles.ItemESPToggle.Value then Functions.AddESP({ Object = Object, Text = ItemNames[Name], Color = Options.ItemESPColor.Value }, Object:GetAttribute("ParentRoom") ~= nil) end
