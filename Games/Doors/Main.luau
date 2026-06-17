@@ -3563,6 +3563,22 @@ Functions.HandleObject = function(Object)
 		if Toggles.ChestESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Mouse", Color = Options.ChestESPColor.Value }, true) end
 		table.insert(Objects.Chests, Object)
 	elseif ItemNames[Name] and Object:FindFirstChild("ModulePrompt") then
+		local Nearest = {
+			Room = nil,
+			Distance = math.huge
+		}
+		for _, Room in pairs(CurrentRooms:GetChildren()) do
+			local Distance = (Room:GetPivot().Position - Object:GetPivot().Position)
+			if Distance < Nearest.Distance then
+				Nearest.Room = Room
+				Nearest.Distance = Distance
+			end
+		end
+
+		if Nearest.Room then
+			Object:SetAttribute("ParentRoom", tonumber(Nearest.Room.Name))
+		end
+		
 		if Toggles.ItemESPToggle.Value then Functions.AddESP({ Object = Object, Text = ItemNames[Name], Color = Options.ItemESPColor.Value }, Object:GetAttribute("ParentRoom") ~= nil) end
 		if Name == "LotusHolder" or Name == "LotusPetalPickup" then
 			Object.Handle:GetPropertyChangedSignal("LocalTransparencyModifier"):Connect(function()
@@ -3854,6 +3870,7 @@ end
 Connections.PromptAnimationFixer1 = Services.ProximityPromptService.PromptButtonHoldBegan:Connect(function(Object)
 	if not Object:GetAttribute("FakePrompt") then return end
 	local ToolNames = { "Lockpick","Shears","SkeletonKey","Key","GeneratorFuse","KeyElectrical","KeyBackdoor","KeyIron", "Multitool" }
+	local AnimateToolNames = { "Lockpick","Shears","SkeletonKey","Multitool" }
 	local Tool
 	for _, N in ToolNames do Tool = Character:FindFirstChild(N) if Tool then break end end
 
@@ -3877,7 +3894,7 @@ Connections.PromptAnimationFixer1 = Services.ProximityPromptService.PromptButton
 	if Prompt.Parent.Name == "Lock1" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) or Prompt.Parent.Name == "Lock2" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) then return end
 	if Functions.HasItem("Shears", true) and IsLockPrompt and Prompt.Parent.Name ~= "CuttableVines" and Prompt.Parent.Name ~= "Chest_Vine" and Prompt.Parent.Name ~= "Cellar" then return end
 	
-	if Tool and Globals.UseAnimation then
+	if Tool and table.find(AnimateToolNames, Tool.Name) and Globals.UseAnimation then
 		Globals.UseAnimationBreak:Stop()
 		Globals.UseAnimation:Stop()
 		Globals.UseAnimation:Play()
@@ -4137,6 +4154,7 @@ Connections.InfiniteItemsHandler = Services.ProximityPromptService.PromptTrigger
 	if not Object:GetAttribute("FakePrompt") then return end
 
 	local ToolNames = { "Lockpick","Shears","SkeletonKey","Key","GeneratorFuse","KeyElectrical","KeyBackdoor","KeyIron", "Multitool" }
+	local AnimateToolNames = { "Lockpick","Shears","SkeletonKey","Multitool" }
 	local Tool
 	for _, N in ToolNames do Tool = Character:FindFirstChild(N) if Tool then break end end
 
@@ -4160,7 +4178,7 @@ Connections.InfiniteItemsHandler = Services.ProximityPromptService.PromptTrigger
 	if Prompt.Parent.Name == "Lock1" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) or Prompt.Parent.Name == "Lock2" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) then return end
 	if Functions.HasItem("Shears", true) and IsLockPrompt and Prompt.Parent.Name ~= "CuttableVines" and Prompt.Parent.Name ~= "Chest_Vine" and Prompt.Parent.Name ~= "Cellar" then return end
 
-	if Tool and Globals.UseAnimation and Globals.UseAnimationBreak then
+	if Tool and table.find(AnimateToolNames, Tool.Name) and Globals.UseAnimation and Globals.UseAnimationBreak then
 		Globals.UseAnimation:Stop()
 		Globals.UseAnimationBreak:Stop()
 		Globals.UseAnimationBreak:Play()
