@@ -4097,7 +4097,7 @@ Functions.TriggerPrompt = function(Prompt)
 		if Humanoid.Health >= Humanoid.MaxHealth then return end
 		local BPack = Functions.HasItem("BandagePack")
 		if BPack and BPack:GetAttribute("Durability") >= BPack:GetAttribute("DurabilityMax") then return end
-	endw
+	end
 
 	if Prompt.Parent.Name == "Battery" then
 		local Tool = Character:FindFirstChildOfClass("Tool")
