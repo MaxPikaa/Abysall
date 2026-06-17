@@ -2895,6 +2895,10 @@ Functions.HandleCharacter = function(NewCharacter)
 	RayParams.FilterType = Enum.RaycastFilterType.Exclude
 
 	Connections.MainHandler = Services.RunService.RenderStepped:Connect(function()
+		if Services.Workspace:FindFirstChild("Camera") then
+			Camera = Services.Workspace:FindFirstChild("Camera")
+		end
+
 		if Toggles.SpeedBoostToggle.Value then
 			Humanoid.WalkSpeed = Functions.GetCurrentSpeed() + Options.SpeedBoostSlider.Value
 		end
