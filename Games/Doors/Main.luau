@@ -3567,7 +3567,7 @@ Functions.HandleObject = function(Object)
 			Room = nil,
 			Distance = math.huge
 		}
-		for _, Player in pairs(Players:GetPlayers()) do
+		for _, Player in pairs(Services.Players:GetPlayers()) do
 			if Player.Character then
 				local Distance = (Player.Character:GetPivot().Position - Object:GetPivot().Position).Magnitude
 				if Distance < Nearest.Distance then
