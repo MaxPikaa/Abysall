@@ -3372,7 +3372,7 @@ Functions.HandleObject = function(Object)
 				end
 			end
 		end)
-		Object:WaitForChild("Door").Open.Played:Once(function()
+		Object:WaitForChild("Door"):WaitForChild("Open").Played:Once(function()
 			DoorConn:Disconnect()
 		end)
 		table.insert(Connections, DoorConn)
@@ -3436,7 +3436,7 @@ Functions.HandleObject = function(Object)
 			for _, Folder in pairs(Objects.PathLights) do
 				Folder:ClearAllChildren()
 			end
-			SeekNodesFolder:ClearAllChildren()
+			Globals.SeekNodesFolder:ClearAllChildren()
 		end)
 		table.insert(Connections, Connection)
 	elseif Name == "Bridge" then
@@ -3715,15 +3715,6 @@ Functions.HandleObject = function(Object)
 		end
 		table.insert(Objects.Entities, Object)
 	elseif Name == "Figure" or Name == "FigureRig" or Name == "FigureRagdoll" then
-		for _, Part in pairs(Object:GetDescendants()) do
-			if Part:IsA("BasePart") then
-				Part.CanTouch = false
-				if Toggles.RemoveFigure.Value then
-					Part.CanCollide = false
-				end
-			end
-		end
-
 		if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Figure", Color = Options.EntityESPColor.Value }, true) end
 		table.insert(Objects.Entities, Object)
 		if Toggles.RemoveFigure.Value and Functions.CheckCompatability({"isnetworkowner"}) then
@@ -3742,6 +3733,7 @@ Functions.HandleObject = function(Object)
 				task.wait(2.5)
 				for _, Part in Object:GetDescendants() do
 					if Part:IsA("BasePart") then
+						Part.CanCollide = false
 						task.spawn(function()
 							while Abysall.Environment.isnetworkowner(Part) do
 								Part.Position = Vector3.new(math.random(-29999,29999), math.random(-29999,29999), math.random(-29999,29999))
