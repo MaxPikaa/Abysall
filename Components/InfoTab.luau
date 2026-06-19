@@ -1,12 +1,7 @@
 return function(Window)
     local LatestChangelog = {
-        "15/6/2026",
-        "<font color='rgb(0, 255, 0)'>+ Added Auto Hearbeat Minigame</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Figure Godmode (Hotel-, Super Hard Mode)</font>",
-		"<font color='rgb(0, 255, 0)'>+ Improved Position Spoof (Hotel-, Super Hard Mode)</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Test Notification Button</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Door Numbers to ESP</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Second Velocity Manipulation Method</font>",
+        "19/6/2026",
+        "<font color='rgb(0, 255, 0)'>+ Fixed Rooms Randomly being Deleted</font>",
 		"<font color='rgb(0, 255, 0)'>+ Other Improvements</font>",
     }
 
