@@ -179,7 +179,7 @@ local ItemNames = {
 	["LaserPointer"]      = "Laser Pointer",
 	["HolyGrenade"]       = "Holy Hand Grenade",
 	["Shears"]            = "Shears",
-	["Smoothie"]          = "Smoohie",
+	["Smoothie"]          = "Smoothie",
 	["Cheese"]            = "Cheese",
 	["Bread"]             = "Bread",
 	["AlarmClock"]        = "Alarm Clock",
@@ -3715,6 +3715,11 @@ Functions.HandleObject = function(Object)
 		end
 		table.insert(Objects.Entities, Object)
 	elseif Name == "Figure" or Name == "FigureRig" or Name == "FigureRagdoll" then
+		for _, Part in Object:GetDescendants() do
+			if Part:IsA("BasePart") then
+				Part.CanTouch = false
+			end
+		end
 		if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Figure", Color = Options.EntityESPColor.Value }, true) end
 		table.insert(Objects.Entities, Object)
 		if Toggles.RemoveFigure.Value and Functions.CheckCompatability({"isnetworkowner"}) then
@@ -4086,8 +4091,8 @@ Functions.TriggerPrompt = function(Prompt)
 	if (Prompt.Parent.Name == "GoldPile" or Prompt.Parent.Name == "StardustPickup") and Options.AutoInteractIgnoreList.Value["Currency"] then return end
 
 	if Prompt.Parent.Name == "Bandage" then
-		if Humanoid.Health >= Humanoid.MaxHealth then return end
 		local BPack = Functions.HasItem("BandagePack")
+		if Humanoid.Health >= Humanoid.MaxHealth and not BPack then return end
 		if BPack and BPack:GetAttribute("Durability") >= BPack:GetAttribute("DurabilityMax") then return end
 	end
 
