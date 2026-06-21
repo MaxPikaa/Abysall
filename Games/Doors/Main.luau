@@ -1054,6 +1054,12 @@ Groupboxes.General_Character:AddToggle("RemoveAcceleration", {
 
 local CustomPhysics
 
+Options.SpeedBoostSlider:OnChanged(function(Value)
+	if RemotesFolder:FindFirstChild("Crouch") then
+		RemotesFolder.Crouch:FireServer(Value and true or Functions.IsCrouching())
+	end
+end)
+
 Toggles.NoclipToggle:AddKeyPicker("NoclipKeybind", {
 	Text = "Noclip", Default = "N", Mode = "Toggle", SyncToggleState = true
 })
@@ -2476,8 +2482,11 @@ if Functions.CheckCompatability({"hookmetamethod", "newcclosure", "getnamecallme
 		if Abysall and Abysall.Environment then
 			local Method = Abysall.Environment.getnamecallmethod()
 
-			if Self.Name == "Crouch" and Method == "FireServer" and (Toggles.CrouchSpoof.Value or Toggles.PositionSpoof.Value) then
-				Args[1] = true
+			if Self.Name == "Crouch" and Method == "FireServer" then
+				if Toggles.CrouchSpoof.Value or Toggles.PositionSpoof.Value then
+					Args[1] = true
+				end
+				Args[2] = true
 			end
 
 			if Self.Name == "ClutchHeartbeat" and Method == "FireServer" and Toggles.AutoHeartbeatMinigame.Value then
@@ -3028,7 +3037,7 @@ Functions.HandleCharacter = function(NewCharacter)
 			end
 		end
 
-		if RemotesFolder:FindFirstChild("Crouch") then
+		if RemotesFolder:FindFirstChild("Crouch") and not Functions.CheckCompatability({"hookmetamethod", "newcclosure", "getnamecallmethod"}) then
 			local IsCrouch = Functions.IsCrouching()
 			if Toggles.CrouchSpoof.Value or Toggles.PositionSpoof.Value then IsCrouch = true end
 			RemotesFolder.Crouch:FireServer(IsCrouch, true)
@@ -3362,8 +3371,8 @@ Functions.HandleObject = function(Object)
 		local LastDoorFire = tick()
 		local DoorConn = Services.RunService.Heartbeat:Connect(function()
 			if Object:FindFirstChild("Door") and Object:FindFirstChild("ClientOpen") then
-				if LocalPlayer:DistanceFromCharacter(Object.Door.Position) < 150
-					and tick() - LastDoorFire > 0.05
+				if LocalPlayer:DistanceFromCharacter(Object.Door.Position) < 75
+					and tick() - LastDoorFire > 0.075
 					and Toggles.DoorReachToggle.Value
 				then
 					Object.ClientOpen:FireServer()
