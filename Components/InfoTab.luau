@@ -1,6 +1,6 @@
 return function(Window)
     local LatestChangelog = {
-        "19/6/2026",
+        "22/6/2026",
         "<font color='rgb(0, 255, 0)'>+ Added EXPERIMENTAL New Object Hnalder, Should Recude Lag when Opening Doors</font>",
 		"<font color='rgb(0, 255, 0)'>+ Fixed Auto Heartbeat Minigame</font>",
 		"<font color='rgb(0, 255, 0)'>+ Fixed Door Reach Voiding You at Seek</font>",
