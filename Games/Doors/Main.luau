@@ -2489,8 +2489,8 @@ if Functions.CheckCompatability({"hookmetamethod", "newcclosure", "getnamecallme
 				Args[2] = true
 			end
 
-			if Self.Name == "ClutchHeartbeat" and Method == "FireServer" and Toggles.AutoHeartbeatMinigame.Value then
-				Args[2] = true
+			if Self.Name == "ClutchHeartbeat" and Method == "FireServer" and Toggles.AutoHeartbeatMinigame.Value or Self.Name == "HideMonster" and Method == "FireServer" and Toggles.AutoHeartbeatMinigame.Value then
+				return
 			end
 
 			if Self.Name == "MotorReplication" and Method == "FireServer" then
@@ -3166,37 +3166,12 @@ Functions.HandleHidingTransparency = function(Model)
 	end
 end
 
-local AllowedInstances = {
-	Lava=true, GoldPile=true, KeyObtain=true, KeyObtainFake=true, Drakobloxxer=true, FuseObtain=true,
-	MinesGenerator=true, JeffTheKiller=true, Snare=true, FakeDoor=true, DoorFake=true, SideroomSpace=true,
-	ChestBox=true, ChestBoxLocked=true, Chest_Vine=true, Locker_Small_Locked=true, Toolbox=true,
-	Toolbox_Locked=true, Wardrobe=true, ["Wardrobe-FOOLS26"]=true, Toolshed=true, Toolshed_Small=true,
-	Bed=true, MinesAnchor=true, Double_Bed=true, RetroWardrobe=true, Backdoor_Wardrobe=true,
-	Rooms_Locker=true, Rooms_Locker_Fridge=true, Locker_Large=true, FigureRig=true, FigureRagdoll=true,
-	TimerLever=true, Lever=true, Seek_Arm=true, ChandelierObstruction=true, ScaryWall=true, Ladder=true,
-	CircularVent=true, Dumpster=true, SquareGrate=true, TriggerEventCollision=true, GrumbleRig=true,
-	GiggleCeiling=true, MinesGateButton=true, ElectricalKeyObtain=true, LibraryHintPaper=true,
-	WaterPump=true, CringlePresent=true, Wheel=true, PickupItem=true, LiveHintBook=true,
-	LiveBreakerPolePickup=true, LeverForGate=true, GloomPile=true, SeekFloodline=true, Door=true,
-	Green_Herb=true, Bridge=true, MouseHole=true, BananaPeel=true, NannerPeel=true, PowerupPad=true,
-	IndustrialGate=true, CollisionFloor=true, ElevatorCar=true, Wax_Door=true, ThingToOpen=true,
-	MovingDoor=true, StardustPickup=true, Hole=true, Groundskeeper=true, MandrakeLive=true,
-	GardenGateButton=true, LotusPetalPickup=true, VineGuillotine=true, LiveEntityBramble=true,
-	RiftSpawn=true, ElevatorBreaker=true, RunnerNodes=true, PathLights=true, DuckBoard=true,
-	Padlock=true, EyestalkEndCutscene=true, MinecartRig=true, SeekMovingNewClone=true
-}
-
 Functions.HandleObject = function(Object)
-	if not AllowedInstances[Object.Name] and Object.ClassName ~= "ProximityPrompt" and Object.Parent ~= CurrentRooms and not ItemNames[Object.Name] then
-		return
-	end
-
 	for _, Room in CurrentRooms:GetChildren() do
 		if Object:IsDescendantOf(Room) then
 			Object:SetAttribute("ParentRoom", tonumber(Room.Name))
 			break
 		end
-        task.wait()
 	end
 
 	if Object.Parent == CurrentRooms then
@@ -3210,34 +3185,42 @@ Functions.HandleObject = function(Object)
 	local Name = Object.Name
 
 	if Name == "KeyObtain" then
-		task.wait(0.5)
-		if Object.Parent then
-			if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Door Key", Color = Options.ObjectiveESPColor.Value }, true) end
-			table.insert(Objects.Objectives, Object)
-		end
+		task.spawn(function()
+			task.wait(0.5)
+			if Object.Parent then
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Door Key", Color = Options.ObjectiveESPColor.Value }, true) end
+				table.insert(Objects.Objectives, Object)
+			end
+		end)
 	elseif Name == "ElectricalKeyObtain" then
-		task.wait(0.5)
-		if Object.Parent then
-			if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Electrical Key", Color = Options.ObjectiveESPColor.Value }, true) end
-			table.insert(Objects.Objectives, Object)
-		end
+		task.spawn(function()
+			task.wait(0.5)
+			if Object.Parent then
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Electrical Key", Color = Options.ObjectiveESPColor.Value }, true) end
+				table.insert(Objects.Objectives, Object)
+			end
+		end)
 	elseif Name == "KeyObtainFake" then
-		task.wait(0.5)
-		if Object.Parent then
-			if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Fake Key", Color = Options.EntityESPColor.Value }, true) end
-			table.insert(Objects.Entities, Object)
-		end
+		task.spawn(function()
+			task.wait(0.5)
+			if Object.Parent then
+				if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Fake Key", Color = Options.EntityESPColor.Value }, true) end
+				table.insert(Objects.Entities, Object)
+			end
+		end)
 	elseif Name == "TimerLever" then
-		task.wait(0.5)
-		if Object.Parent then
-			Object:SetAttribute("AddTime", Object.TakeTimer.TextLabel.Text == "01:00" and 60 or 30)
-			if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Time Lever [+" .. Object:GetAttribute("AddTime") .. "s]", Color = Options.ObjectiveESPColor.Value }, true) end
-			Object:WaitForChild("Main").SoundToPlay.Played:Once(function()
-				Functions.RemoveESP(Object)
-				Functions.BlacklistESP(Object)
-			end)
-			table.insert(Objects.Objectives, Object)
-		end
+		task.spawn(function()
+			task.wait(0.5)
+			if Object.Parent then
+				Object:SetAttribute("AddTime", Object.TakeTimer.TextLabel.Text == "01:00" and 60 or 30)
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Time Lever [+" .. Object:GetAttribute("AddTime") .. "s]", Color = Options.ObjectiveESPColor.Value }, true) end
+				Object:WaitForChild("Main").SoundToPlay.Played:Once(function()
+					Functions.RemoveESP(Object)
+					Functions.BlacklistESP(Object)
+				end)
+				table.insert(Objects.Objectives, Object)
+			end
+		end)
 	elseif Name == "LiveHintBook" then
 		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Hint Book", Color = Options.ObjectiveESPColor.Value }, true) end
 		table.insert(Objects.Objectives, Object)
@@ -3290,15 +3273,17 @@ Functions.HandleObject = function(Object)
 		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object.Hole, Text = "Mandrake Hole", Color = Options.EntityESPColor.Value }, true) end
 		table.insert(Objects.Entities, Object.Hole)
 	elseif Name == "MinesGenerator" then
-		task.wait(0.75)
-		if Object.Parent then
-			if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Generator", Color = Options.ObjectiveESPColor.Value }, true) end
-			Object:WaitForChild("Lever").Sound.Played:Once(function()
-				Functions.RemoveESP(Object)
-				Functions.BlacklistESP(Object)
-			end)
-			table.insert(Objects.Objectives, Object)
-		end
+		task.spawn(function()
+			task.wait(0.75)
+			if Object.Parent then
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Generator", Color = Options.ObjectiveESPColor.Value }, true) end
+				Object:WaitForChild("Lever").Sound.Played:Once(function()
+					Functions.RemoveESP(Object)
+					Functions.BlacklistESP(Object)
+				end)
+				table.insert(Objects.Objectives, Object)
+			end
+		end)
 	elseif Name == "FuseObtain" then
 		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Generator Fuse", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:WaitForChild("Hitbox").FuseModel:GetPropertyChangedSignal("LocalTransparencyModifier"):Once(function()
@@ -3897,12 +3882,53 @@ Connections.PromptAnimationFixer1 = Services.ProximityPromptService.PromptButton
 	end
 end)
 
+Globals.ObjectQueue = {}
+local AllowedInstances = {
+	Lava=true, GoldPile=true, KeyObtain=true, KeyObtainFake=true, Drakobloxxer=true, FuseObtain=true,
+	MinesGenerator=true, JeffTheKiller=true, Snare=true, FakeDoor=true, DoorFake=true, SideroomSpace=true,
+	ChestBox=true, ChestBoxLocked=true, Chest_Vine=true, Locker_Small_Locked=true, Toolbox=true,
+	Toolbox_Locked=true, Wardrobe=true, ["Wardrobe-FOOLS26"]=true, Toolshed=true, Toolshed_Small=true,
+	Bed=true, MinesAnchor=true, Double_Bed=true, RetroWardrobe=true, Backdoor_Wardrobe=true,
+	Rooms_Locker=true, Rooms_Locker_Fridge=true, Locker_Large=true, FigureRig=true, FigureRagdoll=true,
+	TimerLever=true, Lever=true, Seek_Arm=true, ChandelierObstruction=true, ScaryWall=true, Ladder=true,
+	CircularVent=true, Dumpster=true, SquareGrate=true, TriggerEventCollision=true, GrumbleRig=true,
+	GiggleCeiling=true, MinesGateButton=true, ElectricalKeyObtain=true, LibraryHintPaper=true,
+	WaterPump=true, CringlePresent=true, Wheel=true, PickupItem=true, LiveHintBook=true,
+	LiveBreakerPolePickup=true, LeverForGate=true, GloomPile=true, SeekFloodline=true, Door=true,
+	Green_Herb=true, Bridge=true, MouseHole=true, BananaPeel=true, NannerPeel=true, PowerupPad=true,
+	IndustrialGate=true, CollisionFloor=true, ElevatorCar=true, Wax_Door=true, ThingToOpen=true,
+	MovingDoor=true, StardustPickup=true, Hole=true, Groundskeeper=true, MandrakeLive=true,
+	GardenGateButton=true, LotusPetalPickup=true, VineGuillotine=true, LiveEntityBramble=true,
+	RiftSpawn=true, ElevatorBreaker=true, RunnerNodes=true, PathLights=true, DuckBoard=true,
+	Padlock=true, EyestalkEndCutscene=true, MinecartRig=true, SeekMovingNewClone=true
+}
+
+Functions.QueueObject = function(Object)
+	if not AllowedInstances[Object.Name] and Object.ClassName ~= "ProximityPrompt" and Object.Parent ~= CurrentRooms and not ItemNames[Object.Name] then
+		return
+	end
+	table.insert(Globals.ObjectQueue, Object)
+end
+
+Globals.QueueDone = true
+Connections.QueueConnection = Services.RunService.RenderStepped:Connect(function()
+	if not Globals.QueueDone then
+		return
+	end
+	local Object = table.remove(Globals.ObjectQueue, 1)
+	if Object then
+		Globals.QueueDone = false
+		Functions.HandleObject(Object)
+		Globals.QueueDone = true
+	end
+end)
+
 for _, Object in Services.Workspace:GetDescendants() do
-	task.spawn(function() Functions.HandleObject(Object) end)
+	task.spawn(function() Functions.QueueObject(Object) end)
 end
 
 Connections.InstanceHandler = Services.Workspace.DescendantAdded:Connect(function(Object)
-	Functions.HandleObject(Object)
+	Functions.QueueObject(Object)
 end)
 
 for _, Player in Services.Players:GetPlayers() do
