@@ -11,10 +11,10 @@ local Services = setmetatable({}, {
 local Bindable = Instance.new("BindableFunction")
 Bindable.OnInvoke = function(Response)
     local Success, Result = pcall(function()
-        toclipboard("https://discord.gg/5jwbZcqjVF")
+        toclipboard("https://dsc.gg/abysallhub")
     end)
     if not Success then
-        Services.LocalPlayer:Kick("Failed to copy invite.\nhttps://discord.gg/5jwbZcqjVF")
+        Services.LocalPlayer:Kick("Failed to copy invite.\nhttps://dsc.gg/abysallhub")
     end
 end
 
