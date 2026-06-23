@@ -1,3 +1,9 @@
+--[[
+    For anyone wondering, this just sends a discord message when someone executed the script.
+    We only log basic data such as roblox username, executor used and the game you are in.
+    Sensetive data such as IP adresses or HWIDs are NOT logged and never will be.
+]]--
+
 local function CloneReference(Object)
     if Abysall.Environment.cloneref then
         return Abysall.Environment.cloneref(Object)
