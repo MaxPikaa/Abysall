@@ -11,6 +11,8 @@ local BaseUrl = "https://raw.githubusercontent.com/bocaj111004/Abysall/refs/head
 getgenv().Abysall = {
     Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
     ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
+
+    Legit = true, -- pog
 }
 
 local function CloneReference(Object)
