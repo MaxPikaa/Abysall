@@ -1168,7 +1168,7 @@ Toggles.AutoBreakerBox:OnChanged(function(Value)
 	end
 end)
 
-Groupboxes.Self_Automation:AddToggle("AutoHeartbeatMinigame", { Text = "Auto Heartbeat Minigame", Default = false, Tooltip = "Prevents the 'Figure' minigame from ever failing.", Disabled = not Functions.CheckCompatability({"hookmetamethod", "newcclosure", "getnamecallmethod"}), DisabledTooltip = Globals.DisabledTooltip })
+Groupboxes.Self_Automation:AddToggle("AutoHeartbeatMinigame", { Text = "Auto Heartbeat Minigame", Default = false, Tooltip = "Prevents the 'Figure' minigame from ever failing.", Disabled = not Functions.CheckCompatability({"hookmetamethod", "newcclosure", "getnamecallmethod"}), DisabledTooltip = Globals.IncompatibleMessage })
 Groupboxes.Self_Automation:AddDivider()
 Groupboxes.Self_Automation:AddToggle("AutoUnlockPadlockToggle", {
 	Text = "Auto Unlock Padlock", Default = false, Tooltip = "Automatically enters the code into the library padlock."
@@ -4122,9 +4122,9 @@ Functions.TriggerPrompt = function(Prompt)
 
 	if Prompt.Parent.Name == "Battery" then
 		local Tool = Character:FindFirstChildOfClass("Tool")
-		if not Tool then return end
 		local BPack = Functions.HasItem("BatteryPack")
 		if BPack and BPack:GetAttribute("Durability") >= BPack:GetAttribute("DurabilityMax") then return end
+		if not Tool then return end
 		if Tool:GetAttribute("LightSource") then
 			if Tool:GetAttribute("Durability") and Tool:GetAttribute("DurabilityMax")
 				and Tool:GetAttribute("Durability") > Tool:GetAttribute("DurabilityMax")
@@ -4498,4 +4498,4 @@ end)
 
 while not Globals.MainUI do task.wait() end
 Abysall.Interface.ApplySettingsTab(Window)
-Functions.Notify({ Title = "Successfully loaded in " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " seconds." , Body = "Press '" .. tostring(Options.MenuKeybind.Value) .. "' to toggle the UI."}) 
+Functions.Notify({ Title = "Successfully loaded in " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " seconds." , Body = "Press '" .. tostring(Options.MenuKeybind.Value) .. "' to toggle the UI."})
