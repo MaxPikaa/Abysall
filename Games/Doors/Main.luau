@@ -1024,7 +1024,7 @@ local Tabs = {
 	Floors   = Window:AddTab("楼层", "earth"),
 }
 
-Groupboxes.General_Character = Tabs.General:AddLeftGroupbox("移动")
+Groupboxes.General_Character = Tabs.General:AddLeftGroupbox("速度")
 Groupboxes.General_Character:AddSlider("SpeedBoostSlider", {
 	Text = "速度", Min = 0, Max = 85, Default = 0, Rounding = 0, Compact = true
 })
@@ -1394,7 +1394,7 @@ Toggles.VelocityManipulationToggle:AddKeyPicker("VelocityManipulationKeybind", {
 	Mode = Library.IsMobile and "Toggle" or "Hold", SyncToggleState = true
 })
 Groupboxes.Exploits_BypassRight:AddDropdown("VelocityManipulationMode", {
-	Values = {"速度", "位置"}, Text = "操控方式",
+	Values = {"平移", "坐标"}, Text = "操控方式",
 	Default = 1,
 })
 
@@ -1419,7 +1419,7 @@ Groupboxes.Exploits_BypassRight:AddToggle("PositionSpoof", {
 	Tooltip = "让你的角色在游戏上看起来在地下 保护你免受冲刺类实体的攻击"
 })
 Groupboxes.Exploits_BypassRight:AddToggle("CrouchSpoof", {
-	Text = "伪蹲下", Default = false, Tooltip = "让游戏以为你一直在蹲下"
+	Text = "愚人节伪蹲下", Default = false, Tooltip = "让游戏以为你一直在蹲下"
 })
 Toggles.PositionSpoof:OnChanged(function(Value)
 	if Floor ~= "Fools" and Floor ~= "OldHotel" then
@@ -1555,7 +1555,7 @@ Groupboxes.Visuals_Camera:AddToggle("RemoveCutscenes", { Text = "无过场动画
 Groupboxes.Visuals_Camera:AddToggle("RemoveCameraFog", { Text = "去雾", Default = false, Tooltip = "移除相机的所有雾气效果" })
 Groupboxes.Visuals_Camera:AddDivider()
 Groupboxes.Visuals_Camera:AddToggle("ThirdPersonToggle", { Text = "第三人称", Default = false, Tooltip = "拉远相机，让你从背后看到角色" })
-Toggles.ThirdPersonToggle:AddKeyPicker("ThirdPersonKeybind", { Text = "第三人称按键", Default = "T", Mode = "Toggle", SyncToggleState = true })
+Toggles.ThirdPersonToggle:AddKeyPicker("ThirdPersonKeybind", { Text = "第三人称", Default = "T", Mode = "Toggle", SyncToggleState = true })
 Groupboxes.Visuals_Camera:AddSlider("ThirdPersonOffsetX", { Text = "X偏移", Min = -10, Max = 10, Default = 1.5, Rounding = 1, Compact = true })
 Groupboxes.Visuals_Camera:AddSlider("ThirdPersonOffsetY", { Text = "Y偏移", Min = -10, Max = 10, Default = 1,   Rounding = 1, Compact = true })
 Groupboxes.Visuals_Camera:AddSlider("ThirdPersonOffsetZ", { Text = "Z偏移", Min = -10, Max = 10, Default = 5,   Rounding = 1, Compact = true })
@@ -1682,9 +1682,9 @@ Toggles.DisableEntityJumpscares:OnChanged(function(Value)
 	end
 end)
 
-Groupboxes.Visuals_RightTab     = Tabs.Visuals:AddRightTabbox("Entities / Settings")
-Groupboxes.Visuals_Entities     = Groupboxes.Visuals_RightTab:AddTab("Entities")
-Groupboxes.Visuals_EntitySettings = Groupboxes.Visuals_RightTab:AddTab("Settings")
+Groupboxes.Visuals_RightTab     = Tabs.Visuals:AddRightTabbox("实体 / 设置")
+Groupboxes.Visuals_Entities     = Groupboxes.Visuals_RightTab:AddTab("实体")
+Groupboxes.Visuals_EntitySettings = Groupboxes.Visuals_RightTab:AddTab("设置")
 
 Groupboxes.Visuals_Entities:AddDropdown("EntityList", {
 	Text = "实体列表",
@@ -1717,7 +1717,7 @@ Groupboxes.Visuals_EntitySettings:AddSlider("NotifySoundVolume", { Text = "音�
 Groupboxes.Visuals_EntitySettings:AddToggle("NotifyPlaySound", { Text = "播放音效", Default = true, Tooltip = "让通知播放提示音" })
 Groupboxes.Visuals_EntitySettings:AddToggle("NotifyKeepNotifications", { Text = "保留通知", Default = false, Tooltip = "某些通知将保留在屏幕上直到不再需要" })
 Groupboxes.Visuals_EntitySettings:AddButton({ Text = "测试通知", DoubleClick = false, Tooltip = "发送测试通知，查看你的设置效果", Func = function()
-	Functions.Notify({Title = "你好，我是坤坤"})
+	Functions.Notify({Title = "你干嘛哎呦"})
 end})
 
 Groupboxes.Visuals_ESP          = Tabs.Visuals:AddRightTabbox("透视 / 设置")
@@ -1821,14 +1821,14 @@ local ChestLabels = {
 }
 local EntityESPLabels = {
 	KeyObtainFake = "假钥匙", JeffTheKiller = "Jeff the Killer", GiggleCeiling = "Giggle",
-	Snare = "Snare", GrumbleRig = "Grumble",
+	Snare = "陷阱", GrumbleRig = "Grumble",
 	Drakobloxxer = "Drakobloxxer", Hole = "Mandrake Hole", Groundskeeper = "Groundskeeper",
-	LiveEntityBramble = "Bramble", Figure = "Figure", FigureRig = "Figure", FigureRagdoll = "Figure"
+	LiveEntityBramble = "地刺", Figure = "Figure", FigureRig = "Figure", FigureRagdoll = "Figure"
 }
 
 Toggles.DoorESPToggle:OnChanged(function(Value)
 	for _, Object in Objects.Doors do
-		if Value then Functions.AddESP({ Object = Object, Text = "Door " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true)
+		if Value then Functions.AddESP({ Object = Object, Text = "门 " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true)
 		else Functions.RemoveESP(Object) end
 	end
 end)
@@ -1943,7 +1943,7 @@ end)
 
 Toggles.LadderESPToggle:OnChanged(function(Value)
 	for _, Object in Objects.Ladders do
-		if Value then Functions.AddESP({ Object = Object, Text = "Ladder", Color = Options.LadderESPColor.Value }, true)
+		if Value then Functions.AddESP({ Object = Object, Text = "梯子", Color = Options.LadderESPColor.Value }, true)
 		else Functions.RemoveESP(Object) end
 	end
 end)
@@ -3014,14 +3014,14 @@ end)
 		CollisionClone.CollisionGroup = Collision.CollisionGroup
 		CollisionClone.Position = RootPart.Position + Vector3.new(0, Toggles.PositionSpoof.Value and 1.75 or 0.18, 0)
 
-		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "速度" then
+		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "平移" then
 			Globals.ManipulateBody.Parent = RootPart
 			Globals.ManipulateBody.Velocity = RootPart.CFrame.LookVector * 2.25
 		else
 			Globals.ManipulateBody.Parent = nil
 		end
 
-		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "位置" and Floor ~= "Fools" and Floor ~= "OldHotel" then
+		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "坐标" and Floor ~= "Fools" and Floor ~= "OldHotel" then
 			Character:PivotTo(Camera:GetPivot() * CFrame.new(0, 0, 2560))
 		end
 
@@ -3196,7 +3196,7 @@ Functions.HandleObject = function(Object)
 		task.spawn(function()
 			task.wait(0.5)
 			if Object.Parent then
-				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Door Key", Color = Options.ObjectiveESPColor.Value }, true) end
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "门钥匙", Color = Options.ObjectiveESPColor.Value }, true) end
 				table.insert(Objects.Objectives, Object)
 			end
 		end)
@@ -3204,7 +3204,7 @@ Functions.HandleObject = function(Object)
 		task.spawn(function()
 			task.wait(0.5)
 			if Object.Parent then
-				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Electrical Key", Color = Options.ObjectiveESPColor.Value }, true) end
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "电器房钥匙", Color = Options.ObjectiveESPColor.Value }, true) end
 				table.insert(Objects.Objectives, Object)
 			end
 		end)
@@ -3212,7 +3212,7 @@ Functions.HandleObject = function(Object)
 		task.spawn(function()
 			task.wait(0.5)
 			if Object.Parent then
-				if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Fake Key", Color = Options.EntityESPColor.Value }, true) end
+				if Toggles.EntityESPToggle.Value then Functions.AddESP({ Object = Object, Text = "假钥匙", Color = Options.EntityESPColor.Value }, true) end
 				table.insert(Objects.Entities, Object)
 			end
 		end)
@@ -3221,7 +3221,7 @@ Functions.HandleObject = function(Object)
 			task.wait(0.5)
 			if Object.Parent then
 				Object:SetAttribute("AddTime", Object.TakeTimer.TextLabel.Text == "01:00" and 60 or 30)
-				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Time Lever [+" .. Object:GetAttribute("AddTime") .. "s]", Color = Options.ObjectiveESPColor.Value }, true) end
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "计时拉杆 [+" .. Object:GetAttribute("AddTime") .. "秒]", Color = Options.ObjectiveESPColor.Value }, true) end
 				Object:WaitForChild("Main").SoundToPlay.Played:Once(function()
 					Functions.RemoveESP(Object)
 					Functions.BlacklistESP(Object)
@@ -3230,10 +3230,10 @@ Functions.HandleObject = function(Object)
 			end
 		end)
 	elseif Name == "LiveHintBook" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Hint Book", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "密码书", Color = Options.ObjectiveESPColor.Value }, true) end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "LiveBreakerPolePickup" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Fuse Breaker", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "保险丝断路器", Color = Options.ObjectiveESPColor.Value }, true) end
 		for _, Child in Object:GetChildren() do
 			if Child.Name == "ActivateEventPrompt" and (Child.MaxActivationDistance == 5 or Child:GetAttribute("MaxActivationDistance_Old") == 5) then
 				Child:Destroy()
@@ -3241,17 +3241,17 @@ Functions.HandleObject = function(Object)
 		end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "LibraryHintPaper" or Name == "PickupItem" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Hint Paper", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "提示纸", Color = Options.ObjectiveESPColor.Value }, true) end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "MinesAnchor" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Anchor [" .. Object:WaitForChild("Sign").TextLabel.Text .. "]", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "锚点 [" .. Object:WaitForChild("Sign").TextLabel.Text .. "]", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:GetAttributeChangedSignal("Activated"):Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "WaterPump" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object:WaitForChild("Wheel"), Text = "Water Pump", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object:WaitForChild("Wheel"), Text = "水泵", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:WaitForChild("Wheel").Sound.Played:Once(function()
 			Object:SetAttribute("Abysall_Completed", true)
 
@@ -3260,31 +3260,31 @@ Functions.HandleObject = function(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "CringlePresent" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Present", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "礼物", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:WaitForChild("ToolProp").Highlight:Destroy()
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "LeverForGate" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Gate Lever", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "闸门拉杆", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:WaitForChild("Main").SoundToPlay.Played:Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "VineGuillotine" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object.Lever, Text = "Vine Lever", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object.Lever, Text = "藤蔓拉杆", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object.Lever:WaitForChild("ActivateEventPrompt"):GetAttributeChangedSignal("Interactions"):Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "MandrakeLive" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object.Hole, Text = "Mandrake Hole", Color = Options.EntityESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object.Hole, Text = "曼德拉草洞", Color = Options.EntityESPColor.Value }, true) end
 		table.insert(Objects.Entities, Object.Hole)
 	elseif Name == "MinesGenerator" then
 		task.spawn(function()
 			task.wait(0.75)
 			if Object.Parent then
-				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Generator", Color = Options.ObjectiveESPColor.Value }, true) end
+				if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "发电机", Color = Options.ObjectiveESPColor.Value }, true) end
 				Object:WaitForChild("Lever").Sound.Played:Once(function()
 					Functions.RemoveESP(Object)
 					Functions.BlacklistESP(Object)
@@ -3293,28 +3293,28 @@ Functions.HandleObject = function(Object)
 			end
 		end)
 	elseif Name == "FuseObtain" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Generator Fuse", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "发电机保险丝", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object:WaitForChild("Hitbox").FuseModel:GetPropertyChangedSignal("LocalTransparencyModifier"):Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "MinesGateButton" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Gate Button", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "闸门按钮", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object.Parent:WaitForChild("MinesGate").Main.SoundOpen.Played:Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "GardenGateButton" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Gate Button", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "闸门按钮", Color = Options.ObjectiveESPColor.Value }, true) end
 		Object.Parent:WaitForChild("GardenGate").Collision.Sound.Played:Once(function()
 			Functions.RemoveESP(Object)
 			Functions.BlacklistESP(Object)
 		end)
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "Ladder" then
-		if Toggles.LadderESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Ladder", Color = Options.LadderESPColor.Value }, true) end
+		if Toggles.LadderESPToggle.Value then Functions.AddESP({ Object = Object, Text = "梯子", Color = Options.LadderESPColor.Value }, true) end
 		table.insert(Objects.Ladders, Object)
 	elseif Name == "Door" and Object.Parent and tonumber(Object.Parent.Name) then
 		local DoorParts = {}
@@ -3343,7 +3343,7 @@ Functions.HandleObject = function(Object)
 				W.Part0 = HP W.Part1 = DoorPart W.Enabled = true
 			end
 			table.insert(Objects.Doors, HighlightModel)
-			if Toggles.DoorESPToggle.Value then Functions.AddESP({ Object = HighlightModel, Text = "Door " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true) end
+			if Toggles.DoorESPToggle.Value then Functions.AddESP({ Object = HighlightModel, Text = "门 " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true) end
 		else
 			local Root = Object:WaitForChild("Door", 9e9)
 			local HP = Instance.new("Part", Object)
@@ -3358,7 +3358,7 @@ Functions.HandleObject = function(Object)
 			W.Part0 = HP W.Part1 = Root W.Enabled = true
 			Instance.new("Humanoid", Object).Name = "HighlightHumanoid"
 			table.insert(Objects.Doors, HP)
-			if Toggles.DoorESPToggle.Value then Functions.AddESP({ Object = HP, Text = "Door " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true) end
+			if Toggles.DoorESPToggle.Value then Functions.AddESP({ Object = HP, Text = "门 " .. Functions.GetDoorNumber(Object), Color = Options.DoorESPColor.Value }, true) end
 		end
 
 		local LastDoorFire = tick()
