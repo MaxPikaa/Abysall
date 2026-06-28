@@ -49,7 +49,7 @@ local Window = Library:CreateWindow({
 
 Abysall.Interface.ApplyInfoTab(Window)
 local Tabs = {
-    General = Window:AddTab("通用", "house"),
+    General = Window:AddTab("General", "house"),
 }
 
 Functions.CheckCompatability = function(Array)
