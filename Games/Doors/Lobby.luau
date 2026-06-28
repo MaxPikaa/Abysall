@@ -49,7 +49,7 @@ local Window = Library:CreateWindow({
 
 Abysall.Interface.ApplyInfoTab(Window)
 local Tabs = {
-    General = Window:AddTab("General", "house"),
+    General = Window:AddTab("主要", "house"),
 }
 
 Functions.CheckCompatability = function(Array)
@@ -255,7 +255,7 @@ Globals.CodesList = {
 }
 Globals.UnlockedBadges = {}
 
-Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("自身")
+Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("玩家")
 
 Groupboxes.General_Self:AddToggle("AutoJoinElevator", {
     Text = "自动加入电梯",
@@ -294,7 +294,7 @@ Groupboxes.General_Automation:AddButton("兑换所有代码", function()
         return
     end
 
-    Functions.Notify({Title = "正在兑换 " .. #Globals.CodesList .. " 个代码", Body = "请稍候。"})
+    Functions.Notify({Title = "正在兑换 " .. #Globals.CodesList .. " 个代码", Body = "请等待"})
     Globals.RedeemingCodes = true
     for Index, Code in pairs(Globals.CodesList) do
         RemotesFolder.ShopCode:FireServer(Code)
@@ -347,7 +347,7 @@ Connections.MainConnection = Services.RunService.Heartbeat:Connect(function()
 	end
 end)
 
-Groupboxes.General_QuickPlay = Tabs.General:AddRightGroupbox("快速开始")
+Groupboxes.General_QuickPlay = Tabs.General:AddRightGroupbox("直接进 [有管理员的不推荐]")
 
 Groupboxes.General_QuickPlay:AddButton({
 	Text = "酒店",
@@ -480,7 +480,7 @@ Groupboxes.General_QuickPlay:AddButton({
 })
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "酒店-",
+	Text = "酒店",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -510,7 +510,7 @@ Groupboxes.General_QuickPlay:AddButton({
 Groupboxes.General_QuickPlay:AddDivider()
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "房间 [免费, 无进度]",
+	Text = "房间 [免费 无进度]",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -526,7 +526,7 @@ Groupboxes.General_QuickPlay:AddButton({
 })
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "户外 [免费, 无进度]",
+	Text = "户外 [免费 无进度]",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -547,4 +547,4 @@ Library:OnUnload(function()
 end)
 
 Abysall.Interface.ApplySettingsTab(Window)
-Functions.Notify({ Title = "成功加载，耗时 " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " 秒。" , Body = "按 '" .. tostring(Options.MenuKeybind.Value) .. "' 切换界面。"})
+Functions.Notify({ Title = "成功加载 耗时 " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " 秒" , Body = "按 '" .. tostring(Options.MenuKeybind.Value) .. "' 切换界面"})
