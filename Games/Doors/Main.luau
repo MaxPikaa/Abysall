@@ -4081,7 +4081,7 @@ Functions.TriggerPrompt = function(Prompt)
 		or (Prompt.Parent and Prompt.Parent.Parent and Prompt.Parent.Parent.Name == "Locker_Small_Locked" and Prompt.Name == "ActivateEventPrompt")
 
 	if IsLockPrompt then
-		if Options.AutoInteractIgnoreList.Value["Locks"] then return end
+		if Options.AutoInteractIgnoreList.Value["锁"] then return end
 		local KeyItems = { "Key","GeneratorFuse","KeyBackdoor","KeyElectrical","KeyIron","Lockpick","SkeletonKey","Shears","Multitool" }
 		local OffhandKeyItems = { "Key","GeneratorFuse","KeyElectrical","KeyIron" }
 		local HasKey = false
@@ -4095,13 +4095,13 @@ Functions.TriggerPrompt = function(Prompt)
 	if Prompt.Parent.Name == "Lock1" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) or Prompt.Parent.Name == "Lock2" and not Functions.HasItem("Lockpick", true) and not Functions.HasItem("Multitool", true) then return end
 	if Functions.HasItem("Shears", true) and IsLockPrompt and Prompt.Parent.Name ~= "CuttableVines" and Prompt.Parent.Name ~= "Chest_Vine" and Prompt.Parent.Name ~= "Cellar" then return end
 
-	if Prompt.Parent.Name == "GlitchCube" and Options.AutoInteractIgnoreList.Value["Glitch Fragments"] then return end
+	if Prompt.Parent.Name == "GlitchCube" and Options.AutoInteractIgnoreList.Value["故障碎片"] then return end
 
 	if (Prompt.Parent.Name == "KeyObtain" and (Functions.HasItem("Key") or Functions.HasItem("KeyBackdoor")))
 		or (Prompt.Parent.Name == "ElectricalKeyObtain" and Functions.HasItem("KeyElectrical"))
 	then return end
 
-	if Prompt:IsDescendantOf(Drops) and Options.AutoInteractIgnoreList.Value["Dropped Items"] then return end
+	if Prompt:IsDescendantOf(Drops) and Options.AutoInteractIgnoreList.Value["掉落物品"] then return end
 	if Prompt.Parent.Name == "TrackLever" then return end
 	if Prompt.Name == "ActivateEventPrompt" and (Prompt.ActionText == "Close"
 		or Prompt.Parent.Name == "ElevatorBreaker"
@@ -4110,10 +4110,10 @@ Functions.TriggerPrompt = function(Prompt)
 	if Prompt.Name == "ActivateEventPrompt" and (Prompt.Parent.Name == "Padlock" or Prompt.Parent.Name == "MinesAnchor") then return end
 	if Prompt.Parent.Name == "LeverForGate" and Prompt:GetAttribute("Interactions") then return end
 	if Prompt.Parent.Parent and (Prompt.Parent.Parent.Name == "DoorFake" or Prompt.Parent.Parent.Name == "FakeDoor") then return end
-	if Prompt.Parent:GetAttribute("JeffShop") and Options.AutoInteractIgnoreList.Value["Jeff Items"] then return end
+	if Prompt.Parent:GetAttribute("JeffShop") and Options.AutoInteractIgnoreList.Value["Jeff物品"] then return end
 	if Prompt:GetAttribute("AutoInteractIgnore") then return end
-	if Prompt.Name == "PushPrompt" and Options.AutoInteractIgnoreList.Value["Minecarts"] then return end
-	if (Prompt.Parent.Name == "GoldPile" or Prompt.Parent.Name == "StardustPickup") and Options.AutoInteractIgnoreList.Value["Currency"] then return end
+	if Prompt.Name == "PushPrompt" and Options.AutoInteractIgnoreList.Value["矿车"] then return end
+	if (Prompt.Parent.Name == "GoldPile" or Prompt.Parent.Name == "StardustPickup") and Options.AutoInteractIgnoreList.Value["金币"] then return end
 
 	if Prompt.Parent.Name == "Bandage" then
 		local BPack = Functions.HasItem("BandagePack")
