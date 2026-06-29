@@ -1,9 +1,8 @@
 return function(Window)
     local LatestChangelog = {
-        "22/6/2026",
-        "<font color='rgb(0, 255, 0)'>+ Added EXPERIMENTAL New Object Hanlder, Should Reduce Lag when Opening Doors</font>",
-		"<font color='rgb(0, 255, 0)'>+ Fixed Auto Heartbeat Minigame</font>",
-		"<font color='rgb(0, 255, 0)'>+ Fixed Door Reach Voiding You at Seek</font>",
+        "29/6/2026",
+        "<font color='rgb(0, 255, 0)'>+ Changed Max Speed Boost (85 > 100)</font>",
+		"<font color='rgb(0, 255, 0)'>+ Fixed Dying to Seek in Minecart Chase (maybe, tell me if i fixed it)</font>",
 		"<font color='rgb(0, 255, 0)'>+ Other Bug Fixes</font>",
     }
 
