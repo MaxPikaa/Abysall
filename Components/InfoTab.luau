@@ -1,9 +1,10 @@
 return function(Window)
     local LatestChangelog = {
-        "29/6/2026",
-        "<font color='rgb(0, 255, 0)'>+ Changed Max Speed Boost (85 > 100)</font>",
-		"<font color='rgb(0, 255, 0)'>+ Fixed Dying to Seek in Minecart Chase (maybe, tell me if i fixed it)</font>",
-		"<font color='rgb(0, 255, 0)'>+ Other Bug Fixes</font>",
+        "10/7/2026",
+        "<font color='rgb(0, 255, 0)'>+ Added Entity ESP Selection</font>",
+		"<font color='rgb(0, 255, 0)'>+ Added Item Notifier</font>",
+		"<font color='rgb(0, 255, 0)'>+ Added Remove Surge</font>",
+		"<font color='rgb(0, 255, 0)'>+ Fixed Some Broken Features (Bypass Eyes, etc)</font>",
     }
 
     local function CloneReference(Object)
