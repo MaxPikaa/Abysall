@@ -66,7 +66,7 @@ local function WalkPosition(TargetPosition)
 	local FoundPath = false
 	local StuckConnection
 	StuckConnection = Services.RunService.RenderStepped:Connect(function()
-		Humanoid:MoveTo(TargetPosition)
+		LocalPlayer.Character:PivotTo(LocalPlayer.Character:GetPivot() * CFrame.new(0, 0, -0.05))
 		if FoundPath then
 			StuckConnection:Disconnect()
 		end
@@ -74,7 +74,7 @@ local function WalkPosition(TargetPosition)
 
 	while Path.Status ~= Enum.PathStatus.Success do
 		Path = Services.PathfindingService:CreatePath({
-			AgentCanJump = false, AgentCanClimb = false, WaypointSpacing = 2,
+			AgentCanJump = true, AgentCanClimb = true, WaypointSpacing = 2,
 			AgentRadius = 2, AgentHeight = 2
 		})
 
