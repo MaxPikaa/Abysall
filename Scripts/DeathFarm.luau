@@ -103,7 +103,7 @@ local function WalkPosition(TargetPosition)
 
 	return true
 end
-task.wait(0.5)
+task.wait(1)
 
 SendCaption("Getting the key...")
 local Key = CurrentRooms["0"]:FindFirstChild("KeyObtain", true)
