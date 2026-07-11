@@ -3672,7 +3672,7 @@ Functions.HandleObject = function(Object)
 				if Lock and Lock:FindFirstChild("UnlockPrompt") then Lock.UnlockPrompt.Enabled = false end
 			end
 			if Toggles.EntityESPToggle.Value and Options.EntityESPOptions.Value["Dupe"] then
-				Functions.AddESP({ Object = Object, Text = "Dupe", Color = Options.EntityESPColor.Value })
+				Functions.AddESP({ Object = Object, Text = "Dupe", Color = Options.EntityESPColor.Value }, true)
 			end
 			table.insert(Objects.Entities, Object)
 		end
