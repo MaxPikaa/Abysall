@@ -50,62 +50,41 @@ task.wait(1)
 fireproximityprompt(Services.Workspace:FindFirstChild("SkipPrompt", true))
 Services.Workspace:FindFirstChild("Luggage_Cart_Crouch", true):Destroy()
 
-if MainUI:FindFirstChild("ItemShop") then
-	MainUI.ItemShop:Destroy()
-end
-
 local function WalkPosition(TargetPosition)
-	local Path = Services.PathfindingService:CreatePath({
-		AgentCanJump = true, AgentCanClimb = true, WaypointSpacing = 2,
-		AgentRadius = 1, AgentHeight = 1
-	})
-
 	local RootPart = LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9e9)
 	local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid", 9e9)
 
-	local FoundPath = false
-	local StuckConnection
-	StuckConnection = Services.RunService.RenderStepped:Connect(function()
-		LocalPlayer.Character:PivotTo(LocalPlayer.Character:GetPivot() * CFrame.new(0, 0, -0.05))
-		if FoundPath then
-			StuckConnection:Disconnect()
+	local Finished = false
+	local Connection = Services.RunService.RenderStepped:Connect(function()
+		Humanoid:MoveTo(TargetPosition)
+		if LocalPlayer:DistanceFromCharacter(TargetPosition) < 6 then
+			Finished = true
 		end
 	end)
 
-	while Path.Status ~= Enum.PathStatus.Success do
-		Path = Services.PathfindingService:CreatePath({
-			AgentCanJump = true, AgentCanClimb = true, WaypointSpacing = 2,
-			AgentRadius = 2, AgentHeight = 2
-		})
-
-		Path:ComputeAsync(RootPart.Position, TargetPosition)
-		task.wait()
-	end
-
-	FoundPath = true
-	for Index, Waypoint in pairs(Path:GetWaypoints()) do
-		local Finished = false
-		local Connection = Services.RunService.RenderStepped:Connect(function()
-			Humanoid:MoveTo(Waypoint.Position)
-			if LocalPlayer:DistanceFromCharacter(Waypoint.Position) < 6 then
-				Finished = true
-			end
-		end)
-
-		while task.wait() do
-			if Finished then
-				Connection:Disconnect()
-				break
-			end
+	while task.wait() do
+		if Finished then
+			Connection:Disconnect()
+			break
 		end
-		task.wait()
 	end
+	task.wait()
 
 	return true
 end
 task.wait(1)
 
+for Index, Object in pairs(CurrentRooms["0"].Assets:GetChildren()) do
+	if Object.Name == "Potted_Plant" then
+		Object.Collision.CanCollide = false
+	end
+end
+
 SendCaption("Getting the key...")
+local Door = CurrentRooms["0"]:FindFirstChild("Door")
+Door.Lock.CanCollide = false
+WalkPosition(Door.Lock.Position)
+
 local Key = CurrentRooms["0"]:FindFirstChild("KeyObtain", true)
 WalkPosition(Key.Hitbox.Position)
 fireproximityprompt(Key:FindFirstChild("ModulePrompt", true))
