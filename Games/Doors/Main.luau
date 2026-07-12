@@ -1823,7 +1823,7 @@ Groupboxes.Visuals_ESP_Toggles:AddToggle("LadderESPToggle",     { Text = "Ladder
 Groupboxes.Visuals_ESP_Toggles:AddDivider()
 Groupboxes.Visuals_ESP_Toggles:AddDropdown("EntityESPOptions",     { 
 	Text = "Entity List",
-	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==" },
+	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Snare","Giggle","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==" },
 	Multi = true,
 	AllowNull = true
 })
@@ -3404,7 +3404,7 @@ Functions.HandleObject = function(Object)
 				HP.CanCollide = false
 				HP.CFrame = DoorPart.CFrame
 				HP.Name = "HighlightPart"
-				HP.Material = Enum.Material.Glass
+				HP.Material = Enum.Material.Plastic
 				HP:SetAttribute("ParentRoom", tonumber(Object.Parent.Name))
 				local W = Instance.new("WeldConstraint", HP)
 				W.Part0 = HP W.Part1 = DoorPart W.Enabled = true
@@ -3419,7 +3419,7 @@ Functions.HandleObject = function(Object)
 			HP.CanCollide = false
 			HP.CFrame = Root.CFrame
 			HP.Name = "HighlightPart"
-			HP.Material = Enum.Material.Glass
+			HP.Material = Enum.Material.Plastic
 			HP:SetAttribute("ParentRoom", tonumber(Object.Parent.Name))
 			local W = Instance.new("WeldConstraint", HP)
 			W.Part0 = HP W.Part1 = Root W.Enabled = true
@@ -4401,7 +4401,7 @@ Connections.EntityHandler = Services.Workspace.ChildAdded:Connect(function(Entit
 	if RusherAliases[EntityData.Alias] then
 		Instance.new("Humanoid", Entity).Name = "HighlightHumanoid"
 		local Root = Entity.PrimaryPart
-		if Root then Root.Transparency = 0.999 Root.Material = Enum.Material.Glass end
+		if Root then Root.Transparency = 0.999 Root.Material = Enum.Material.Plastic end
 	end
 
 	if Entity.Name == "Lookman" then
