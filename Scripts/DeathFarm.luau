@@ -2,7 +2,7 @@ while not game:IsLoaded() do
 	task.wait(1)
 end
 
-print("Abysall Hub 死亡刷取 for DOORS，由 FireBacon (bocaj111004) 制作")
+print("Abysall Hub 死亡刷取 for DOORS，由 FireBacon 制作")
 print("dsc.gg/abysallhub")
 
 local Services = setmetatable({}, {
@@ -13,7 +13,7 @@ local Services = setmetatable({}, {
 
 local QueueTeleport = queue_on_teleport or queueonteleport
 local TeleportCode = [==[
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxPikaa/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
 ]==]
 
 local LocalPlayer = Services.Players.LocalPlayer
@@ -263,3 +263,4 @@ SendCaption("玩家已死亡，正在加入新对局...")
 
 RemotesFolder.PlayAgain:FireServer()
 QueueTeleport(TeleportCode)
+
