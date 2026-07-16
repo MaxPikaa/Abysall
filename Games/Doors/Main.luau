@@ -2068,7 +2068,7 @@ Tabs.Floors:UpdateWarningBox({
 
 Groupboxes.Floors_Automation = Tabs.Floors:AddRightGroupbox("自动化")
 Groupboxes.Floors_Automation:AddToggle("AutoSteerMinecart", {
-	Text = "自动驾驶矿车", Default = false, Tooltip = "自动完成矿车追逐",
+	Text = "自动矿车", Default = false, Tooltip = "自动完成矿车追逐",
 	Disabled = not Functions.CheckCompatability({"require"}), DisabledTooltip = Globals.IncompatibleMessage
 })
 Groupboxes.Floors_Automation:AddSlider("AutoSteerMinecartTurnDistance", {
