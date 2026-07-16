@@ -2,7 +2,7 @@ while not game:IsLoaded() do
 	task.wait(1)
 end
 
-print("Abysall Hub death farm for DOORS, created by FireBacon (bocaj111004)")
+print("Abysall Hub 死亡刷取 for DOORS，由 FireBacon (bocaj111004) 制作")
 print("dsc.gg/abysallhub")
 
 local Services = setmetatable({}, {
@@ -30,7 +30,45 @@ local function SendCaption(Text)
 end
 
 if game.PlaceId == 6516141723 then
-	SendCaption("Joining a run...")
+	SendCaption("正在加入对局...")
+	QueueTeleport(TeleportCode)
+	RemotesFolder.CreateElevator:FireServer({
+		Mods = {},
+		Settings = {},
+		Destination = "Hotel",
+while not game:IsLoaded() do
+	task.wait(1)
+end
+
+print("Abysall Hub 死亡刷取 for DOORS，由 FireBacon 制作")
+print("dsc.gg/abysallhub")
+
+local Services = setmetatable({}, {
+	__index = function(self, Key)
+		return game:GetService(Key)
+	end
+})
+
+local QueueTeleport = queue_on_teleport or queueonteleport
+local TeleportCode = [==[
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
+]==]
+
+local LocalPlayer = Services.Players.LocalPlayer
+local RemotesFolder = Services.ReplicatedStorage:FindFirstChild("RemotesFolder")
+local CurrentRooms = Services.Workspace:FindFirstChild("CurrentRooms")
+local GameData = Services.ReplicatedStorage:FindFirstChild("GameData")
+
+local function SendCaption(Text)
+	if firesignal then
+		firesignal(RemotesFolder.Caption.OnClientEvent, "[Abysall Hub] " .. Text)
+	else
+		RemotesFolder.CaptionClient:Fire("[Abysall Hub] " .. Text)
+	end
+end
+
+if game.PlaceId == 6516141723 then
+	SendCaption("正在加入对局...")
 	QueueTeleport(TeleportCode)
 	RemotesFolder.CreateElevator:FireServer({
 		Mods = {},
@@ -56,7 +94,7 @@ if GameData and GameData.Floor.Value ~= "Hotel" then
 		local QueueTeleport = queue_on_teleport or queueonteleport
 		QueueTeleport([=[loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()]=])
 
-		SendCaption("Joining a run...")
+		SendCaption("正在加入对局...")
 		RemotesFolder.CreateElevator:FireServer({
 			Mods = {},
 			Settings = {},
@@ -84,7 +122,7 @@ if game.PlaceId ~= 6839171747 then
 		local QueueTeleport = queue_on_teleport or queueonteleport
 		QueueTeleport([=[loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()]=])
 
-		SendCaption("Joining a run...")
+		SendCaption("正在加入对局...")
 		RemotesFolder.CreateElevator:FireServer({
 			Mods = {},
 			Settings = {},
@@ -99,7 +137,7 @@ if game.PlaceId ~= 6839171747 then
 end
 
 if #CurrentRooms:GetChildren() > 1 or LocalPlayer.Character then
-	SendCaption("Run has already started, joining a new run for best experience...")
+	SendCaption("对局已经开始，正在加入新对局以获得最佳体验...")
 	QueueTeleport(TeleportCode)
 	RemotesFolder.PlayAgain:FireServer()
 	return
@@ -150,7 +188,7 @@ for Index, Object in pairs(CurrentRooms["0"].Assets:GetChildren()) do
 	end
 end
 
-SendCaption("Getting the key...")
+SendCaption("正在获取钥匙...")
 local Door = CurrentRooms["0"]:FindFirstChild("Door")
 Door.Lock.CanCollide = false
 WalkPosition(Door.Lock.Position)
@@ -159,7 +197,7 @@ local Key = CurrentRooms["0"]:FindFirstChild("KeyObtain", true)
 WalkPosition(Key.Hitbox.Position)
 fireproximityprompt(Key:FindFirstChild("ModulePrompt", true))
 
-SendCaption("Got the key, opening the door...")
+SendCaption("已获取钥匙，正在开门...")
 local Door = CurrentRooms["0"]:FindFirstChild("Door")
 Door.Lock.CanCollide = false
 WalkPosition(Door.Lock.Position)
@@ -172,12 +210,56 @@ end
 if replicatesignal then
 	replicatesignal(LocalPlayer.Kill)
 else
-	SendCaption("Please wait around 20 seconds to die")
+	SendCaption("请等待大约 20 秒后死亡")
 	RemotesFolder.Underwater:FireServer(true)
 end
 
 LocalPlayer:GetAttributeChangedSignal("Alive"):Wait()
-SendCaption("Player has died, joining a new run...")
+SendCaption("玩家已死亡，正在加入新对局...")
+
+RemotesFolder.PlayAgain:FireServer()
+QueueTeleport(TeleportCode)		end
+	end
+	task.wait()
+
+	return true
+end
+task.wait(1)
+
+for Index, Object in pairs(CurrentRooms["0"].Assets:GetChildren()) do
+	if Object.Name == "Potted_Plant" then
+		Object.Collision.CanCollide = false
+	end
+end
+
+SendCaption("正在获取钥匙...")
+local Door = CurrentRooms["0"]:FindFirstChild("Door")
+Door.Lock.CanCollide = false
+WalkPosition(Door.Lock.Position)
+
+local Key = CurrentRooms["0"]:FindFirstChild("KeyObtain", true)
+WalkPosition(Key.Hitbox.Position)
+fireproximityprompt(Key:FindFirstChild("ModulePrompt", true))
+
+SendCaption("已获取钥匙，正在开门...")
+local Door = CurrentRooms["0"]:FindFirstChild("Door")
+Door.Lock.CanCollide = false
+WalkPosition(Door.Lock.Position)
+fireproximityprompt(Door:FindFirstChild("UnlockPrompt", true))
+
+while not CurrentRooms:FindFirstChild("2") do
+	task.wait()
+end
+
+if replicatesignal then
+	replicatesignal(LocalPlayer.Kill)
+else
+	SendCaption("请等待大约 20 秒后死亡")
+	RemotesFolder.Underwater:FireServer(true)
+end
+
+LocalPlayer:GetAttributeChangedSignal("Alive"):Wait()
+SendCaption("玩家已死亡，正在加入新对局...")
 
 RemotesFolder.PlayAgain:FireServer()
 QueueTeleport(TeleportCode)
