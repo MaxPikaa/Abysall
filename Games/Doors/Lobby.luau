@@ -49,7 +49,7 @@ local Window = Library:CreateWindow({
 
 Abysall.Interface.ApplyInfoTab(Window)
 local Tabs = {
-    General = Window:AddTab("General", "house"),
+    General = Window:AddTab("主要", "house"),
 }
 
 Functions.CheckCompatability = function(Array)
@@ -255,7 +255,7 @@ Globals.CodesList = {
 }
 Globals.UnlockedBadges = {}
 
-Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("Self")
+Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("自身")
 
 Groupboxes.General_Self:AddToggle("AutoJoinElevator", {
     Text = "自动加入电梯",
@@ -270,7 +270,7 @@ Groupboxes.General_Self:AddDropdown("AutoJoinElevatorTarget", {
     Searchable = true
 })
 
-Groupboxes.General_Automation = Tabs.General:AddLeftGroupbox("Automation")
+Groupboxes.General_Automation = Tabs.General:AddLeftGroupbox("自动化")
 
 Groupboxes.General_Automation:AddToggle("CycleAchievements", {
     Text = "循环展示成就",
@@ -548,3 +548,4 @@ end)
 
 Abysall.Interface.ApplySettingsTab(Window)
 Functions.Notify({ Title = "成功加载，耗时 " .. math.floor((tick() - LoadStart) * 1000) / 1000 .. " 秒", Body = "按 '" .. tostring(Options.MenuKeybind.Value) .. "' 切换界面"})
+
