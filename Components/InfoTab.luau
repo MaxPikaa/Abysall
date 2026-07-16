@@ -1,7 +1,7 @@
 return function(Window)
     local LatestChangelog = {
         "2026/7/11",
-        "<font color='rgb(0, 255, 0)'>+ 新增 实体 ESP 选择</font>",
+        "<font color='rgb(0, 255, 0)'>+ 新增 实体 ESP</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 物品通知</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 移除 Surge</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 死亡刷取</font>",
