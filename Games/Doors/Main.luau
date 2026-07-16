@@ -1776,10 +1776,10 @@ local ObjectiveLabels = {
 	["ElectricalKeyObtain"]    = "电气钥匙",
 	["MinesGenerator"]         = "发电机",
 	["FuseObtain"]             = "发电机保险丝",
-	["LiveHintBook"]           = "提示书",
+	["LiveHintBook"]           = "书",
 	["LiveBreakerPolePickup"]  = "保险丝断路器",
-	["LibraryHintPaper"]       = "提示纸",
-	["PickupItem"]             = "提示纸",
+	["LibraryHintPaper"]       = "密码纸",
+	["PickupItem"]             = "密码纸",
 	["CringlePresent"]         = "礼物",
 	["LeverForGate"]           = "闸门杠杆",
 	["MinesGateButton"]        = "闸门按钮",
@@ -3297,7 +3297,7 @@ Functions.HandleObject = function(Object)
 			end
 		end)
 	elseif Name == "LiveHintBook" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "提示书", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "书", Color = Options.ObjectiveESPColor.Value }, true) end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "LiveBreakerPolePickup" then
 		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "保险丝断路器", Color = Options.ObjectiveESPColor.Value }, true) end
@@ -3308,7 +3308,7 @@ Functions.HandleObject = function(Object)
 		end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "LibraryHintPaper" or Name == "PickupItem" then
-		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "提示纸", Color = Options.ObjectiveESPColor.Value }, true) end
+		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "密码纸", Color = Options.ObjectiveESPColor.Value }, true) end
 		table.insert(Objects.Objectives, Object)
 	elseif Name == "MinesAnchor" then
 		if Toggles.ObjectiveESPToggle.Value then Functions.AddESP({ Object = Object, Text = "锚点 [" .. Object:WaitForChild("Sign").TextLabel.Text .. "]", Color = Options.ObjectiveESPColor.Value }, true) end
