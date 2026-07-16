@@ -52,7 +52,7 @@ return function(Window)
     end
 
     local Name, Version = Abysall.Environment.identifyexecutor()
-    local Executor = InfoTab:AddRightGroupbox("执行器信息")
+    local Executor = InfoTab:AddRightGroupbox("注入器信息")
     Executor:AddLabel("名称: " .. Name, true)
 	Executor:AddLabel("版本: " .. (Version and Version or "N/A"), true)
     Executor:AddDivider()
