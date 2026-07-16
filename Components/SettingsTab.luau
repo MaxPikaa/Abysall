@@ -20,7 +20,7 @@ return function(Window)
 	local Toggles = Library.Toggles
 	local Options = Library.Options
 	
-	local SettingsTab = Window:AddTab("Settings", "settings")
+	local SettingsTab = Window:AddTab("设置", "settings")
 	local MenuGroup = SettingsTab:AddLeftGroupbox("Menu")
 	
 	MenuGroup:AddToggle("KeybindMenuOpen", {
