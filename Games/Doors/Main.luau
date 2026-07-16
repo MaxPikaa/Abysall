@@ -1018,10 +1018,10 @@ local Window = Library:CreateWindow({
 Abysall.Interface.ApplyInfoTab(Window)
 
 local Tabs = {
-	General  = Window:AddTab("General", "house"),
-	Exploits = Window:AddTab("Exploits", "shield"),
-	Visuals  = Window:AddTab("Visuals", "eye"),
-	Floors   = Window:AddTab("Floors", "earth"),
+	General  = Window:AddTab("主要", "house"),
+	Exploits = Window:AddTab("绕过", "shield"),
+	Visuals  = Window:AddTab("视觉", "eye"),
+	Floors   = Window:AddTab("楼层", "earth"),
 }
 
 Groupboxes.General_Character = Tabs.General:AddLeftGroupbox("角色")
@@ -1394,7 +1394,7 @@ Toggles.VelocityManipulationToggle:AddKeyPicker("VelocityManipulationKeybind", {
 	Mode = Library.IsMobile and "Toggle" or "Hold", SyncToggleState = true
 })
 Groupboxes.Exploits_BypassRight:AddDropdown("VelocityManipulationMode", {
-	Values = {"速度", "轴心"}, Text = "操控方法",
+	Values = {"平移", "轴心"}, Text = "操控方法",
 	Default = 1,
 })
 
@@ -2330,11 +2330,11 @@ end)
 
 Groupboxes.Floors_Completion = Tabs.Floors:AddRightGroupbox("完成度")
 Groupboxes.Floors_Completion:AddButton({
-    Text = "自动完成水坝 Seek",
+    Text = "自动完成200门",
     Tooltip = "自动传送并与每个水泵互动",
     Func = function()
         if LatestRoom.Value < 100 or Floor ~= "Mines" then
-            Functions.Notify({Title = "你必须在 200 号房间才能执行此操作"})
+            Functions.Notify({Title = "你必须在 200 门才能执行此操作"})
             return
         end
 
@@ -2435,12 +2435,12 @@ Options.ShowEyestalkPathColor:OnChanged(function(V)  UpdateBeamColor(Objects.Eye
 
 Groupboxes.Floors_Bypass = Tabs.Floors:AddLeftGroupbox("绕过")
 Groupboxes.Floors_Bypass:AddToggle("RemoveSeekTrigger", {
-	Text = "禁用 Seek 触发器", Default = false, Tooltip = "禁用 'Seek' 追逐触发器",
+	Text = "删除 Seek 触发", Default = false, Tooltip = "禁用 'Seek' 追逐触发",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel"),
 	Disabled = not Functions.CheckCompatability({"firetouchinterest"}), DisabledTooltip = Globals.IncompatibleMessage
 })
 Groupboxes.Floors_Bypass:AddToggle("RemoveFigure", {
-	Text = "禁用 Figure", Default = false, Tooltip = "完全移除实体 'Figure'（并非总是有效）",
+	Text = "删除 Figure", Default = false, Tooltip = "完全移除实体 'Figure'（并非总是有效）",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel" or Floor == "Mines"),
 	Disabled = not Functions.CheckCompatability({"isnetworkowner"}), DisabledTooltip = Globals.IncompatibleMessage
 })
@@ -2449,7 +2449,7 @@ Groupboxes.Floors_Bypass:AddToggle("AutoRevive", {
 	Risky = not (Floor == "Fools" or Floor == "OldHotel")
 })
 Groupboxes.Floors_Bypass:AddToggle("FigureGodmode", {
-	Text = "Figure 上帝模式", Default = false, Tooltip = "防止 'Figure' 伤害你",
+	Text = "防 Figure", Default = false, Tooltip = "防止 'Figure' 伤害你",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel")
 })
 Groupboxes.Floors_Bypass:AddDivider()
@@ -2509,9 +2509,9 @@ Groupboxes.Floors_Farming:AddButton({
 	DisabledTooltip = Globals.ImcompatibleMessage
 })
 Groupboxes.Floors_Farming:AddButton({
-	Text = "复制死亡刷取 Loadstring",
+	Text = "复制死亡刷取脚本",
 	DoubleClick = false,
-	Tooltip = "将死亡刷取 loadstring 复制到剪贴板",
+	Tooltip = "将死亡刷取脚本复制到剪贴板",
 	Func = function()
 		toclipboard([==[
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxPikaa/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
@@ -3091,14 +3091,14 @@ Connections.MainHandler = Services.RunService.RenderStepped:Connect(function()
 		CollisionClone.CollisionGroup = Collision.CollisionGroup
 		CollisionClone.Position = RootPart.Position + Vector3.new(0, Toggles.PositionSpoof.Value and 1.75 or 0.18, 0)
 
-		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "Velocity" then
+		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "平移" then
 			Globals.ManipulateBody.Parent = RootPart
 			Globals.ManipulateBody.Velocity = RootPart.CFrame.LookVector * 2.25
 		else
 			Globals.ManipulateBody.Parent = nil
 		end
 
-		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "Pivot" and Floor ~= "Fools" and Floor ~= "OldHotel" then
+		if Toggles.VelocityManipulationToggle.Value and Options.VelocityManipulationMode.Value == "轴心" and Floor ~= "Fools" and Floor ~= "OldHotel" then
 			Character:PivotTo(Camera:GetPivot() * CFrame.new(0, 0, 2560))
 		end
 
