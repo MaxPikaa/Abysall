@@ -466,7 +466,7 @@ Globals.DoorsNotify = function(NotifyOptions)
 	end)
 end
 
-Globals.STX = loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Components/STX.luau"))()
+Globals.STX = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxPikaa/Abysall/refs/heads/main/Components/STX.luau"))()
 Functions.Notify = function(Settings)
 	local HiddenContainer = GetHiddenContainer()
 
@@ -2502,7 +2502,7 @@ Groupboxes.Floors_Farming:AddButton({
 	DoubleClick = true,
 	Tooltip = "自动刷取死亡次数，加入新对局",
 	Func = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxPikaa/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
 	end,
 
 	Disabled = not Functions.CheckCompatability({"fireproximityprompt", "firesignal"}),
@@ -2514,7 +2514,7 @@ Groupboxes.Floors_Farming:AddButton({
 	Tooltip = "将死亡刷取 loadstring 复制到剪贴板",
 	Func = function()
 		toclipboard([==[
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/bocaj111004/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxPikaa/Abysall/refs/heads/main/Scripts/DeathFarm.luau"))()
 		]==])
 		Library:Notify("Loadstring 已复制到剪贴板")
 	end,
