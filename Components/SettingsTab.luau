@@ -25,13 +25,13 @@ return function(Window)
 	
 	MenuGroup:AddToggle("KeybindMenuOpen", {
 		Default = Library.KeybindFrame.Visible,
-		Text = "Open Keybind Menu",
+		Text = "打开快捷键菜单",
 		Callback = function(value)
 			Library.KeybindFrame.Visible = value
 		end,
 	})
 	MenuGroup:AddToggle("ShowCustomCursor", {
-		Text = "Custom Cursor",
+		Text = "自定义鼠标外观",
 		Default = false,
 		Callback = function(Value)
 			Library.ShowCustomCursor = Value
@@ -39,7 +39,7 @@ return function(Window)
 	})
 
 	MenuGroup:AddDropdown("UILibrary", {
-		Text = "UI Style",
+		Text = "界面样式",
 		Values = {
 			"Obsidian",
 			"Linoria"
@@ -75,7 +75,7 @@ return function(Window)
 		Values = { "50%", "75%", "100%", "125%", "150%", "175%", "200%" },
 		Default = "100%",
 	
-		Text = "DPI Scale",
+		Text = "UI 缩放",
 	
 		Callback = function(Value)
 			Value = Value:gsub("%%", "")
@@ -85,14 +85,14 @@ return function(Window)
 		end,
 	})
 	MenuGroup:AddDivider()
-	MenuGroup:AddLabel("Menu bind"):AddKeyPicker("MenuKeybind", { Default = "RightShift", NoUI = true, Text = "Menu keybind" })
+	MenuGroup:AddLabel("菜单快捷键"):AddKeyPicker("MenuKeybind", { Default = "RightShift", NoUI = true, Text = "菜单快捷键" })
 	
-	MenuGroup:AddButton("Copy Discord Invite", function()
+	MenuGroup:AddButton("复制 Discord 邀请链接", function()
 		toclipboard("https://dsc.gg/abysallhub")
-		Library:Notify("Discord invite copied.")
+		Library:Notify("Discord 邀请链接已复制。")
 	end)
 	
-	MenuGroup:AddButton("Unload", function()
+	MenuGroup:AddButton("卸载脚本", function()
 		Library:Unload()
 	end)
 	
