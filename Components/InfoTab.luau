@@ -1,11 +1,11 @@
 return function(Window)
     local LatestChangelog = {
-        "11/7/2026",
-        "<font color='rgb(0, 255, 0)'>+ Added Entity ESP Selection</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Item Notifier</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Remove Surge</font>",
-		"<font color='rgb(0, 255, 0)'>+ Added Death Farm</font>",
-		"<font color='rgb(0, 255, 0)'>+ Fixed Some Broken Features (Bypass Eyes, etc)</font>",
+        "2026/7/11",
+        "<font color='rgb(0, 255, 0)'>+ 新增 实体 ESP 选择</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 物品通知器</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 移除 Surge</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 死亡刷怪</font>",
+		"<font color='rgb(0, 255, 0)'>+ 修复 部分失效功能（绕过视线检测等）</font>",
     }
 
     local function CloneReference(Object)
@@ -44,7 +44,7 @@ return function(Window)
     })
 
     User:AddLabel("ID: " .. LocalPlayer.Name, true)
-    User:AddLabel("Total Executions: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
+    User:AddLabel("总执行次数: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
 
     local Changelog = InfoTab:AddRightGroupbox("Changelog")
     for Index, Change in pairs(LatestChangelog) do
@@ -53,10 +53,10 @@ return function(Window)
 
     local Name, Version = Abysall.Environment.identifyexecutor()
     local Executor = InfoTab:AddRightGroupbox("Executor Info")
-    Executor:AddLabel("Name: " .. Name, true)
-	Executor:AddLabel("Version: " .. (Version and Version or "N/A"), true)
+    Executor:AddLabel("名称: " .. Name, true)
+	Executor:AddLabel("版本: " .. (Version and Version or "N/A"), true)
     Executor:AddDivider()
-    Executor:AddLabel("Test Result: ", true)
+    Executor:AddLabel("测试结果: ", true)
 
     for Index, Result in pairs(Abysall.Environment.Results) do
 		-- fix for veloshitty 💔
@@ -67,8 +67,8 @@ return function(Window)
     end
 
     local Community = InfoTab:AddLeftGroupbox("Community")
-    Community:AddButton("Copy Discord Invite", function()
+    Community:AddButton("复制 Discord 邀请链接", function()
 	    toclipboard("https://dsc.gg/abysallhub")
-	    Library:Notify("Discord invite copied.")
+	    Library:Notify("Discord 邀请链接已复制。")
     end)
 end
