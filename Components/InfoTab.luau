@@ -4,7 +4,7 @@ return function(Window)
         "<font color='rgb(0, 255, 0)'>+ 新增 实体 ESP 选择</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 物品通知</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 移除 Surge</font>",
-		"<font color='rgb(0, 255, 0)'>+ 新增 死亡Farm</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 死亡刷取</font>",
 		"<font color='rgb(0, 255, 0)'>+ 修复 部分失效功能（绕过视线检测等）</font>",
     }
 
@@ -30,9 +30,9 @@ return function(Window)
     local Options = Library.Options
 
     local LocalPlayer = Services.Players.LocalPlayer
-    local InfoTab = Window:AddTab("Info", "user")
+    local InfoTab = Window:AddTab("信息", "user")
 
-    local User = InfoTab:AddLeftGroupbox("User Info")
+    local User = InfoTab:AddLeftGroupbox("用户信息")
 
     local ImageSize = Enum.ThumbnailSize.Size420x420
     local ImageType = Enum.ThumbnailType.HeadShot
@@ -46,13 +46,13 @@ return function(Window)
     User:AddLabel("ID: " .. LocalPlayer.Name, true)
     User:AddLabel("总执行次数: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
 
-    local Changelog = InfoTab:AddRightGroupbox("Changelog")
+    local Changelog = InfoTab:AddRightGroupbox("更新日志")
     for Index, Change in pairs(LatestChangelog) do
         Changelog:AddLabel(Change, true)
     end
 
     local Name, Version = Abysall.Environment.identifyexecutor()
-    local Executor = InfoTab:AddRightGroupbox("Executor Info")
+    local Executor = InfoTab:AddRightGroupbox("执行器信息")
     Executor:AddLabel("名称: " .. Name, true)
 	Executor:AddLabel("版本: " .. (Version and Version or "N/A"), true)
     Executor:AddDivider()
@@ -66,7 +66,7 @@ return function(Window)
         Executor:AddLabel(Result, true)
     end
 
-    local Community = InfoTab:AddLeftGroupbox("Community")
+    local Community = InfoTab:AddLeftGroupbox("社区")
     Community:AddButton("复制 Discord 邀请链接", function()
 	    toclipboard("https://dsc.gg/abysallhub")
 	    Library:Notify("Discord 邀请链接已复制。")
