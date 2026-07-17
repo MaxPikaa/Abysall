@@ -584,7 +584,7 @@ Library.Notify = function(Data, Body, Time)
 end
 
 if not LocalPlayer.Character or not CurrentRooms:FindFirstChildOfClass("Model") then
-	Functions.Notify({ Title = "等待游戏加载ing...." })
+	Functions.Notify({ Title = "等待游戏加载" })
 	while not LocalPlayer.Character or not CurrentRooms:FindFirstChildOfClass("Model") do
 		task.wait()
 	end
@@ -1024,7 +1024,7 @@ local Tabs = {
 	Floors   = Window:AddTab("楼层", "earth"),
 }
 
-Groupboxes.General_Character = Tabs.General:AddLeftGroupbox("角色")
+Groupboxes.General_Character = Tabs.General:AddLeftGroupbox("玩家")
 Groupboxes.General_Character:AddSlider("SpeedBoostSlider", {
 	Text = "速度调节", Min = 0, Max = 120, Default = 0, Rounding = 0, Compact = true
 })
@@ -1045,7 +1045,7 @@ Groupboxes.General_Character:AddToggle("NoclipToggle", {
 	Text = "穿墙", Default = false, Tooltip = "允许你的角色穿过固体物体"
 })
 Groupboxes.General_Character:AddToggle("RemoveClosetDelay", {
-	Text = "移除衣柜延迟", Default = false,
+	Text = "无进出延迟", Default = false,
 	Tooltip = "移除动画结束后短时间内无法离开衣柜的限制"
 })
 Groupboxes.General_Character:AddToggle("RemoveAcceleration", {
@@ -1099,7 +1099,7 @@ Toggles.EnableCharacterSlide:OnChanged(function(Value)
 	end
 end)
 
-Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("自身")
+Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("其他")
 Groupboxes.General_Self:AddToggle("DoorReachToggle", {
 	Text = "远程开门", Default = false, Tooltip = "允许你从更远距离开门"
 })
@@ -1122,7 +1122,7 @@ end)
 
 Groupboxes.General_Self:AddDivider()
 Groupboxes.General_Self:AddSlider("PromptReachSlider", {
-	Text = "交互距离距离", Min = 1, Max = 2, Default = 1, Rounding = 1, Compact = true
+	Text = "交互距离", Min = 1, Max = 2, Default = 1, Rounding = 1, Compact = true
 })
 Groupboxes.General_Self:AddToggle("InstantPrompts", {
 	Text = "快速交互", Default = false, Tooltip = "允许你立即触发所有交互提示"
@@ -1147,7 +1147,7 @@ Toggles.PromptClip:OnChanged(function(Value)
 	end
 end)
 
-Groupboxes.Self_Automation = Tabs.General:AddRightGroupbox("自动化")
+Groupboxes.Self_Automation = Tabs.General:AddRightGroupbox("自动")
 Groupboxes.Self_Automation:AddToggle("AutoBreakerBox", {
 	Text = "自动配电箱", Default = false, Tooltip = "自动完成配电箱任务"
 })
@@ -1190,8 +1190,8 @@ Toggles.AutoInteractToggle:AddKeyPicker("AutoInteractKeybind", {
 })
 Groupboxes.Self_Automation:AddDropdown("AutoInteractIgnoreList", {
 	Text = "忽略列表",
-	Values = { "故障碎片", "Jeff 物品", "掉落物品", "货币", "矿车", "锁" },
-	Default = { "故障碎片", "Jeff 物品", "掉落物品" },
+	Values = { "故障碎片", "Jeff物品", "掉落物品", "金币", "矿车", "锁" },
+	Default = { "故障碎片", "Jeff物品", "掉落物品" },
 	Multi = true, AllowNull = true
 })
 Groupboxes.Self_Automation:AddDivider()
@@ -1251,7 +1251,7 @@ Groupboxes.Self_Misc:AddButton({
 	end
 })
 
-Groupboxes.Exploits_Bypass = Tabs.Exploits:AddLeftGroupbox("防")
+Groupboxes.Exploits_Bypass = Tabs.Exploits:AddLeftGroupbox("实体")
 Groupboxes.Exploits_Bypass:AddToggle("BypassGiggle",         { Text = "防 Giggle",           Default = false, Tooltip = "防止 'Giggle' 攻击你" })
 Groupboxes.Exploits_Bypass:AddToggle("BypassDupe",           { Text = "防 Dupe",             Default = false, Tooltip = "防止你打开 'Dupe' 假门" })
 Groupboxes.Exploits_Bypass:AddToggle("BypassEyes",           { Text = "防 Eyes",             Default = false, Tooltip = "防止 'Eyes' 伤害你" })
@@ -1380,7 +1380,7 @@ Groupboxes.Exploits_BypassRight:AddToggle("DisableAnticheat", {
 	Tooltip = "完全禁用反作弊，在与梯子交互之后"
 })
 Groupboxes.Exploits_BypassRight:AddToggle("VelocityManipulationToggle", {
-	Text = "速度操控", Default = false,
+	Text = "反作弊操控", Default = false,
 	Tooltip = "缓慢地向前移动你的角色，减轻游戏的反穿墙机制"
 })
 Toggles.DisableAnticheat:OnChanged(function(Value)
@@ -1390,7 +1390,7 @@ Toggles.DisableAnticheat:OnChanged(function(Value)
 	end
 end)
 Toggles.VelocityManipulationToggle:AddKeyPicker("VelocityManipulationKeybind", {
-	Text = "速度操控", Default = "V",
+	Text = "反作弊操控", Default = "V",
 	Mode = Library.IsMobile and "Toggle" or "Hold", SyncToggleState = true
 })
 Groupboxes.Exploits_BypassRight:AddDropdown("VelocityManipulationMode", {
@@ -1407,7 +1407,7 @@ Groupboxes.Exploits_BypassRight:AddToggle("InfiniteItemsToggle", {
 })
 Groupboxes.Exploits_BypassRight:AddDropdown("InfiniteItemsList", {
 	Text = "物品列表",
-	Values = { "开锁器", "骷髅钥匙", "剪刀", "多功能工具" },
+	Values = { "开锁器", "骷髅钥匙", "剪刀", "其他的" },
 	Multi = true, AllowNull = true,
 	Disabled = not Functions.CheckCompatability({"fireproximityprompt"}),
 	DisabledTooltip = Globals.IncompatibleMessage
@@ -1544,17 +1544,17 @@ Toggles.RemoveInteractingSounds:OnChanged(function(Value)
 	Globals.MainUI.Initiator.Main_Game.Reminder.Caption.Volume = Value and 0 or 0.1
 end)
 
-Groupboxes.Visuals_LeftTab = Tabs.Visuals:AddLeftTabbox("相机 / 特效")
+Groupboxes.Visuals_LeftTab = Tabs.Visuals:AddLeftTabbox("相机 / 效果")
 Groupboxes.Visuals_Camera = Groupboxes.Visuals_LeftTab:AddTab("相机")
-Groupboxes.Visuals_Camera:AddToggle("AmbientToggle", { Text = "环境光", Default = false, Tooltip = "将光照颜色更改为指定值" })
+Groupboxes.Visuals_Camera:AddToggle("AmbientToggle", { Text = "高亮", Default = false, Tooltip = "将光照颜色更改为指定值" })
 Groupboxes.Visuals_Camera:AddSlider("FieldOfView", { Text = "视野范围", Min = 1, Max = 120, Default = 70, Rounding = 0 })
 Groupboxes.Visuals_Camera:AddDivider()
 Groupboxes.Visuals_Camera:AddToggle("RemoveCameraShake", {
-	Text = "移除镜头抖动", Default = false, Tooltip = "防止镜头抖动",
+	Text = "无视角抖动", Default = false, Tooltip = "防止视角抖动",
 	Disabled = not Functions.CheckCompatability({"require"}), DisabledTooltip = Globals.IncompatibleMessage
 })
 Groupboxes.Visuals_Camera:AddToggle("RemoveCameraBobbing", {
-	Text = "移除镜头晃动", Default = false, Tooltip = "防止移动时镜头晃动",
+	Text = "无视角晃动", Default = false, Tooltip = "防止移动时视角晃动",
 	Disabled = not Functions.CheckCompatability({"require"}), DisabledTooltip = Globals.IncompatibleMessage
 })
 Groupboxes.Visuals_Camera:AddToggle("RemoveCutscenes", { Text = "移除过场动画", Default = false, Tooltip = "移除所有非必要的过场动画" })
@@ -1609,7 +1609,7 @@ Toggles.RemoveCutscenes:OnChanged(function(Value)
     end
 end)
 
-Groupboxes.Visuals_Effects = Groupboxes.Visuals_LeftTab:AddTab("特效")
+Groupboxes.Visuals_Effects = Groupboxes.Visuals_LeftTab:AddTab("效果")
 Groupboxes.Visuals_Effects:AddToggle("TransparentHidingSpotsToggle", { Text = "透明躲藏点", Default = false, Tooltip = "进入躲藏点时使其变为透明" })
 Groupboxes.Visuals_Effects:AddSlider("TransparentHidingSpotsSlider", { Text = "透明度", Min = 0, Max = 1, Default = 0.5, Rounding = 2, Compact = true })
 
@@ -1640,13 +1640,13 @@ Options.TransparentHidingSpotsSlider:OnChanged(function(Value)
 end)
 
 Groupboxes.Visuals_Effects:AddDivider()
-Groupboxes.Visuals_Effects:AddToggle("DisableGlitchJumpscare",   { Text = "禁用 Glitch 跳脸",   Default = false, Tooltip = "禁用 'Glitch' 的跳脸." })
-Groupboxes.Visuals_Effects:AddToggle("DisableTimothyJumpscare",  { Text = "禁用 Timothy 跳脸",  Default = false, Tooltip = "禁用 'Timothy' 的跳脸" })
-Groupboxes.Visuals_Effects:AddToggle("DisableVoidJumpscare",     { Text = "禁用 Void 跳脸",     Default = false, Tooltip = "禁用 'Void' 的跳脸" })
+Groupboxes.Visuals_Effects:AddToggle("DisableGlitchJumpscare",   { Text = "移除 Glitch 跳脸",   Default = false, Tooltip = "移除 'Glitch' 的跳脸." })
+Groupboxes.Visuals_Effects:AddToggle("DisableTimothyJumpscare",  { Text = "移除 Timothy 跳脸",  Default = false, Tooltip = "移除 'Timothy' 的跳脸" })
+Groupboxes.Visuals_Effects:AddToggle("DisableVoidJumpscare",     { Text = "移除 Void 跳脸",     Default = false, Tooltip = "移除 'Void' 的跳脸" })
 Groupboxes.Visuals_Effects:AddDivider()
-Groupboxes.Visuals_Effects:AddToggle("DisableHideVignette",      { Text = "禁用躲藏暗角",      Default = false, Tooltip = "禁用躲藏时暗角效果" })
-Groupboxes.Visuals_Effects:AddToggle("DisableFiredampEffect",    { Text = "禁用沼气效果",    Default = false, Tooltip = "禁用沼气效果" })
-Groupboxes.Visuals_Effects:AddToggle("DisableEntityJumpscares",  { Text = "禁用实体跳脸",  Default = false, Tooltip = "禁用来自 Rush 和 Ambush 等实体的跳脸" })
+Groupboxes.Visuals_Effects:AddToggle("DisableHideVignette",      { Text = "无躲藏暗角",      Default = false, Tooltip = "移除躲藏时暗角效果" })
+Groupboxes.Visuals_Effects:AddToggle("DisableFiredampEffect",    { Text = "无沼气效果",    Default = false, Tooltip = "移除沼气效果" })
+Groupboxes.Visuals_Effects:AddToggle("DisableEntityJumpscares",  { Text = "无实体跳杀动画",  Default = false, Tooltip = "移除来自 Rush 和 Ambush 等实体的跳杀动画" })
 
 Toggles.DisableGlitchJumpscare:OnChanged(function(Value)
 	Modules.Glitch.Name = Value and "Glitch_Disabled" or "Glitch"
@@ -1739,7 +1739,7 @@ Groupboxes.Visuals_EntitySettings:AddSlider("NotifySoundVolume", { Text = "提�
 Groupboxes.Visuals_EntitySettings:AddToggle("NotifyPlaySound", { Text = "播放提示音", Default = true, Tooltip = "让通知播放提示音" })
 Groupboxes.Visuals_EntitySettings:AddToggle("NotifyKeepNotifications", { Text = "保留通知", Default = false, Tooltip = "某些通知会一直停留在屏幕上，直到不再需要" })
 Groupboxes.Visuals_EntitySettings:AddButton({ Text = "测试通知", DoubleClick = false, Tooltip = "发送测试通知，让你看看设置效果", Func = function()
-	Functions.Notify({Title = "这是一条测试"})
+	Functions.Notify({Title = "你干嘛哈哈诶呦"})
 end})
 
 Groupboxes.Visuals_ESP          = Tabs.Visuals:AddRightTabbox("透视 / 设置")
@@ -1818,7 +1818,7 @@ Groupboxes.Visuals_ESP_Toggles:AddToggle("HidingSpotESPToggle", { Text = "躲藏
 Groupboxes.Visuals_ESP_Toggles:AddToggle("PlayerESPToggle",     { Text = "玩家",      Default = false, Tooltip = "显示其他玩家" })
 Groupboxes.Visuals_ESP_Toggles:AddToggle("ChestESPToggle",      { Text = "箱子",       Default = false, Tooltip = "显示可能包含战利品的物体" })
 Groupboxes.Visuals_ESP_Toggles:AddToggle("ItemESPToggle",       { Text = "物品",        Default = false, Tooltip = "显示所有可收集物品/消耗品" })
-Groupboxes.Visuals_ESP_Toggles:AddToggle("CurrencyESPToggle",   { Text = "货币",     Default = false, Tooltip = "显示所有生成的货币" })
+Groupboxes.Visuals_ESP_Toggles:AddToggle("CurrencyESPToggle",   { Text = "金币",     Default = false, Tooltip = "显示所有生成的金币" })
 Groupboxes.Visuals_ESP_Toggles:AddToggle("LadderESPToggle",     { Text = "梯子",      Default = false, Tooltip = "显示可用于禁用反作弊的梯子" })
 Groupboxes.Visuals_ESP_Toggles:AddDivider()
 Groupboxes.Visuals_ESP_Toggles:AddDropdown("EntityESPOptions",     { 
@@ -1834,7 +1834,7 @@ Toggles.HidingSpotESPToggle:AddColorPicker("HidingSpotESPColor", { Text = "躲�
 Toggles.PlayerESPToggle:AddColorPicker("PlayerESPColor",       { Text = "玩家",      Default = Color3.fromRGB(255, 255, 255), Transparency = 0 })
 Toggles.ChestESPToggle:AddColorPicker("ChestESPColor",         { Text = "箱子",       Default = Color3.fromRGB(255, 255, 0),   Transparency = 0 })
 Toggles.ItemESPToggle:AddColorPicker("ItemESPColor",           { Text = "物品",        Default = Color3.fromRGB(170, 0, 255),   Transparency = 0 })
-Toggles.CurrencyESPToggle:AddColorPicker("CurrencyESPColor",   { Text = "货币",     Default = Color3.fromRGB(255, 255, 0),   Transparency = 0 })
+Toggles.CurrencyESPToggle:AddColorPicker("CurrencyESPColor",   { Text = "金币",     Default = Color3.fromRGB(255, 255, 0),   Transparency = 0 })
 Toggles.LadderESPToggle:AddColorPicker("LadderESPColor",       { Text = "梯子",      Default = Color3.fromRGB(255, 255, 255), Transparency = 0 })
 Toggles.EntityESPToggle:AddColorPicker("EntityESPColor",       { Text = "实体",     Default = Color3.fromRGB(255, 0, 0),     Transparency = 0 })
 
@@ -1842,7 +1842,7 @@ local HidingSpotLabels = {
 	Wardrobe = "衣柜", ["Backdoor_Wardrobe"] = "衣柜", Toolshed = "衣柜",
 	RetroWardrobe = "衣柜", ["Wardrobe-FOOLS26"] = "衣柜",
 	Locker_Large = "储物柜", Rooms_Locker = "储物柜", Rooms_Locker_Fridge = "储物柜",
-	Bed = "床", Double_Bed = "双人床", CircularVent = "通风口", Dumpster = "垃圾箱"
+	Bed = "床", Double_Bed = "床", CircularVent = "通风口", Dumpster = "垃圾箱"
 }
 local ChestLabels = {
 	ChestBox = true, ChestBoxLocked = true, Toolbox = true, Toolbox_Locked = true,
@@ -2020,9 +2020,9 @@ Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTextFont", {
 	Default = 12
 })
 Groupboxes.Visuals_ESP_Settings:AddDivider()
-Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTracersOrigin",  { Text = "连线起点", Values = { "底部","中心","顶部","鼠标" }, Default = 1 })
-Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTracerThickness",  { Text = "连线粗细", Min = 0.5, Max = 2, Default = 0.75, Rounding = 2, Compact = true })
-Groupboxes.Visuals_ESP_Settings:AddToggle("ESPTracersToggle",    { Text = "启用连线", Default = false, Tooltip = "向显示物体画一条线" })
+Groupboxes.Visuals_ESP_Settings:AddDropdown("ESPTracersOrigin",  { Text = "射线起点", Values = { "底部","中心","顶部","鼠标" }, Default = 1 })
+Groupboxes.Visuals_ESP_Settings:AddSlider("ESPTracerThickness",  { Text = "射线粗细", Min = 0.5, Max = 2, Default = 0.75, Rounding = 2, Compact = true })
+Groupboxes.Visuals_ESP_Settings:AddToggle("ESPTracersToggle",    { Text = "启用射线", Default = false, Tooltip = "向显示物体画一条线" })
 Groupboxes.Visuals_ESP_Settings:AddDivider()
 Groupboxes.Visuals_ESP_Settings:AddSlider("ESPArrowsRadius",     { Text = "箭头半径", Min = 100, Max = 500, Default = 250, Rounding = 0, Compact = true })
 Groupboxes.Visuals_ESP_Settings:AddToggle("ESPArrowsToggle",     { Text = "启用箭头", Default = false, Tooltip = "显示指向屏幕外物体的箭头" })
@@ -2066,7 +2066,7 @@ Tabs.Floors:UpdateWarningBox({
 	Text = "标红的特色在当前楼层无效",
 })
 
-Groupboxes.Floors_Automation = Tabs.Floors:AddRightGroupbox("自动化")
+Groupboxes.Floors_Automation = Tabs.Floors:AddRightGroupbox("自动")
 Groupboxes.Floors_Automation:AddToggle("AutoSteerMinecart", {
 	Text = "自动矿车", Default = false, Tooltip = "自动完成矿车追逐",
 	Disabled = not Functions.CheckCompatability({"require"}), DisabledTooltip = Globals.IncompatibleMessage
@@ -2330,7 +2330,7 @@ end)
 
 Groupboxes.Floors_Completion = Tabs.Floors:AddRightGroupbox("完成度")
 Groupboxes.Floors_Completion:AddButton({
-    Text = "自动完成200门",
+    Text = "自动完成 200门",
     Tooltip = "自动传送并与每个水泵互动",
     Func = function()
         if LatestRoom.Value < 100 or Floor ~= "Mines" then
@@ -2435,12 +2435,12 @@ Options.ShowEyestalkPathColor:OnChanged(function(V)  UpdateBeamColor(Objects.Eye
 
 Groupboxes.Floors_Bypass = Tabs.Floors:AddLeftGroupbox("绕过")
 Groupboxes.Floors_Bypass:AddToggle("RemoveSeekTrigger", {
-	Text = "删除 Seek 触发", Default = false, Tooltip = "禁用 'Seek' 追逐触发",
+	Text = "无Seek触发", Default = false, Tooltip = "禁用 'Seek' 追逐触发",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel"),
 	Disabled = not Functions.CheckCompatability({"firetouchinterest"}), DisabledTooltip = Globals.IncompatibleMessage
 })
 Groupboxes.Floors_Bypass:AddToggle("RemoveFigure", {
-	Text = "删除 Figure", Default = false, Tooltip = "完全移除实体 'Figure'（并非总是有效）",
+	Text = "删除Figure", Default = false, Tooltip = "完全移除实体 'Figure'（并非总是有效）",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel" or Floor == "Mines"),
 	Disabled = not Functions.CheckCompatability({"isnetworkowner"}), DisabledTooltip = Globals.IncompatibleMessage
 })
@@ -2453,9 +2453,9 @@ Groupboxes.Floors_Bypass:AddToggle("FigureGodmode", {
 	Risky = not (Floor == "Fools" or Floor == "OldHotel")
 })
 Groupboxes.Floors_Bypass:AddDivider()
-Groupboxes.Floors_Bypass:AddToggle("RemoveBasementGate",  { Text = "移除地下室门",   Default = false, Tooltip = "移除地下室房间的门",            Risky = not (Floor == "Fools" or Floor == "OldHotel") })
-Groupboxes.Floors_Bypass:AddToggle("RemovePaintingsDoor", { Text = "移除画室门",  Default = false, Tooltip = "移除画室中的壁炉门", Risky = not (Floor == "Fools" or Floor == "OldHotel") })
-Groupboxes.Floors_Bypass:AddToggle("RemoveSkeletonDoor",  { Text = "移除骷髅门",   Default = false, Tooltip = "移除医务室中的骷髅门",    Risky = Floor ~= "Fools" })
+Groupboxes.Floors_Bypass:AddToggle("RemoveBasementGate",  { Text = "移除地下室的门",   Default = false, Tooltip = "移除地下室房间的门",            Risky = not (Floor == "Fools" or Floor == "OldHotel") })
+Groupboxes.Floors_Bypass:AddToggle("RemovePaintingsDoor", { Text = "移除画室的门",  Default = false, Tooltip = "移除画室中的壁炉门", Risky = not (Floor == "Fools" or Floor == "OldHotel") })
+Groupboxes.Floors_Bypass:AddToggle("RemoveSkeletonDoor",  { Text = "移除骷髅的门",   Default = false, Tooltip = "移除医务室中的骷髅门",    Risky = Floor ~= "Fools" })
 
 local ObstructionNames = { ThingToOpen = "RemoveBasementGate", MovingDoor = "RemovePaintingsDoor", Wax_Door = "RemoveSkeletonDoor" }
 for ObjName, ToggleName in ObstructionNames do
@@ -2487,7 +2487,7 @@ Groupboxes.Floors_Farming:AddButton({
 		if LocalPlayer.PlayerGui:FindFirstChild("TopbarUI") then 
 			local GoldCount = LocalPlayer.PlayerGui.TopbarUI.Topbar.StatsTopbarHandler.StatModules.Gold.GoldVal
 			if GoldCount.Value <= 0 then
-				Functions.Notify({Title = "你必须拥有金币才能执行此操作"})
+				Functions.Notify({Title = "你必须拥有20金币以上才能执行此操作"})
 				return
 			end
 		end
@@ -3836,7 +3836,7 @@ Functions.HandleObject = function(Object)
 		Connections.BreakerConnection = Object:WaitForChild("SurfaceGui").Frame.Code:GetPropertyChangedSignal("Text"):Connect(function()
 			if Toggles.AutoBreakerBox.Value then
 				if not Globals.BreakerBoxStartNotified and (Floor == "Fools" or Floor == "OldHotel") then
-					Functions.Notify({ Title = "正在尝试解决配电箱", Body = "请稍候" })
+					Functions.Notify({ Title = "正在尝试配电箱", Body = "请稍候" })
 					Globals.BreakerBoxStartNotified = true
 				end
 				RemotesFolder.EBF:FireServer()
@@ -4194,7 +4194,7 @@ Functions.TriggerPrompt = function(Prompt)
 	if Prompt.Parent:GetAttribute("JeffShop") and Options.AutoInteractIgnoreList.Value["Jeff 物品"] then return end
 	if Prompt:GetAttribute("AutoInteractIgnore") then return end
 	if Prompt.Name == "PushPrompt" and Options.AutoInteractIgnoreList.Value["矿车"] then return end
-	if (Prompt.Parent.Name == "GoldPile" or Prompt.Parent.Name == "StardustPickup") and Options.AutoInteractIgnoreList.Value["货币"] then return end
+	if (Prompt.Parent.Name == "GoldPile" or Prompt.Parent.Name == "StardustPickup") and Options.AutoInteractIgnoreList.Value["金币"] then return end
 
 	if Prompt.Parent.Name == "Bandage" then
 		local BPack = Functions.HasItem("BandagePack")
