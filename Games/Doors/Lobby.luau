@@ -255,7 +255,7 @@ Globals.CodesList = {
 }
 Globals.UnlockedBadges = {}
 
-Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("自身")
+Groupboxes.General_Self = Tabs.General:AddLeftGroupbox("电梯")
 
 Groupboxes.General_Self:AddToggle("AutoJoinElevator", {
     Text = "自动加入电梯",
@@ -270,7 +270,7 @@ Groupboxes.General_Self:AddDropdown("AutoJoinElevatorTarget", {
     Searchable = true
 })
 
-Groupboxes.General_Automation = Tabs.General:AddLeftGroupbox("自动化")
+Groupboxes.General_Automation = Tabs.General:AddLeftGroupbox("自动")
 
 Groupboxes.General_Automation:AddToggle("CycleAchievements", {
     Text = "循环展示成就",
@@ -289,7 +289,7 @@ Groupboxes.General_Automation:AddSlider("CycleAchievementsDelay", {
 
 Groupboxes.General_Automation:AddDivider()
 
-Groupboxes.General_Automation:AddButton("兑换所有代码", function()
+Groupboxes.General_Automation:AddButton("兑换所有礼品码", function()
     if Globals.RedeemingCodes then
         return
     end
@@ -422,7 +422,7 @@ Groupboxes.General_QuickPlay:AddButton({
 Groupboxes.General_QuickPlay:AddDivider()
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "战斗模式",
+	Text = "斗争模式",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -480,7 +480,7 @@ Groupboxes.General_QuickPlay:AddButton({
 })
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "酒店-",
+	Text = "旧版酒店",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -510,7 +510,7 @@ Groupboxes.General_QuickPlay:AddButton({
 Groupboxes.General_QuickPlay:AddDivider()
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "房间 [免费 无成就]",
+	Text = "房间 [免费 无成就 管理员]",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
@@ -526,7 +526,7 @@ Groupboxes.General_QuickPlay:AddButton({
 })
 
 Groupboxes.General_QuickPlay:AddButton({
-	Text = "户外 [免费 无成就]",
+	Text = "户外 [免费 无成就 管理员]",
 	DoubleClick = false,
 	Func = function()
 		RemotesFolder.CreateElevator:FireServer({
