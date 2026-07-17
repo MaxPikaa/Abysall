@@ -1,9 +1,9 @@
 return function(Window)
     local LatestChangelog = {
         "2026/7/11",
-        "<font color='rgb(0, 255, 0)'>+ 新增 实体 ESP</font>",
-		"<font color='rgb(0, 255, 0)'>+ 新增 物品通知</font>",
-		"<font color='rgb(0, 255, 0)'>+ 新增 移除 Surge</font>",
+        "<font color='rgb(0, 255, 0)'>+ 新增 实体ESP选择</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 物品生成通知</font>",
+		"<font color='rgb(0, 255, 0)'>+ 新增 移除Surge</font>",
 		"<font color='rgb(0, 255, 0)'>+ 新增 死亡刷取</font>",
 		"<font color='rgb(0, 255, 0)'>+ 修复 部分失效功能（绕过视线检测等）</font>",
     }
