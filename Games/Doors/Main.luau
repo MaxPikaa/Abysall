@@ -1407,7 +1407,7 @@ Groupboxes.Exploits_BypassRight:AddToggle("InfiniteItemsToggle", {
 })
 Groupboxes.Exploits_BypassRight:AddDropdown("InfiniteItemsList", {
 	Text = "物品列表",
-	Values = { "开锁器", "骷髅钥匙", "剪刀", "其他的" },
+	Values = { "开锁器", "骷髅钥匙", "剪刀", "多功能工具" },
 	Multi = true, AllowNull = true,
 	Disabled = not Functions.CheckCompatability({"fireproximityprompt"}),
 	DisabledTooltip = Globals.IncompatibleMessage
@@ -1434,7 +1434,7 @@ Toggles.PositionSpoof:OnChanged(function(Value)
 	end
 end)
 Toggles.PositionSpoof:AddKeyPicker("PositionSpoof", {
-	Text = "Position Spoof", Default = "B", Mode = "Toggle", SyncToggleState = true
+	Text = "无敌模式", Default = "B", Mode = "Toggle", SyncToggleState = true
 })
 Toggles.CrouchSpoof:OnChanged(function(Value)
 	if RemotesFolder:FindFirstChild("Crouch") then
@@ -2328,7 +2328,7 @@ Connections.RoomsHandler = CurrentRooms.ChildAdded:Connect(function(Room)
 	end
 end)
 
-Groupboxes.Floors_Completion = Tabs.Floors:AddRightGroupbox("Completion")
+Groupboxes.Floors_Completion = Tabs.Floors:AddRightGroupbox("完成")
 Groupboxes.Floors_Completion:AddButton({
     Text = "自动完成Seek水泵",
     Tooltip = "自动传送与交互水泵",
@@ -2435,7 +2435,7 @@ Options.ShowEyestalkPathColor:OnChanged(function(V)  UpdateBeamColor(Objects.Eye
 
 Groupboxes.Floors_Bypass = Tabs.Floors:AddLeftGroupbox("绕过")
 Groupboxes.Floors_Bypass:AddToggle("RemoveSeekTrigger", {
-	Text = "无Seek触发", Default = false, Tooltip = "禁用 'Seek' 追逐触发",
+	Text = "无Seek追逐触发", Default = false, Tooltip = "禁用 'Seek' 追逐触发",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel"),
 	Disabled = not Functions.CheckCompatability({"firetouchinterest"}), DisabledTooltip = Globals.IncompatibleMessage
 })
@@ -2449,7 +2449,7 @@ Groupboxes.Floors_Bypass:AddToggle("AutoRevive", {
 	Risky = not (Floor == "Fools" or Floor == "OldHotel")
 })
 Groupboxes.Floors_Bypass:AddToggle("FigureGodmode", {
-	Text = "防 Figure", Default = false, Tooltip = "防止 'Figure' 伤害你",
+	Text = "防Figure的攻击", Default = false, Tooltip = "防止 'Figure' 伤害你",
 	Risky = not (Floor == "Fools" or Floor == "OldHotel")
 })
 Groupboxes.Floors_Bypass:AddDivider()
